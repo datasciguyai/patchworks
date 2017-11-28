@@ -35,20 +35,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3F08D94A1FA230350078BAF2 /* Model Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Model Controllers";
-			sourceTree = "<group>";
-		};
-		3F08D94B1FA230500078BAF2 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
 		3F08D94C1FA232600078BAF2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,10 +64,8 @@
 			children = (
 				3F4032AB1FA0F2FC00EAEBE9 /* Info.plist */,
 				3F40329F1FA0F2FC00EAEBE9 /* AppDelegate.swift */,
-				3F08D94A1FA230350078BAF2 /* Model Controllers */,
 				3F4032B21FA0F37F00EAEBE9 /* Resources */,
 				3F4032B11FA0F36500EAEBE9 /* Storyboards */,
-				3F08D94B1FA230500078BAF2 /* View Controllers */,
 				3F08D94C1FA232600078BAF2 /* Views */,
 			);
 			path = Patchworks;
