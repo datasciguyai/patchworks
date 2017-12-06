@@ -70,6 +70,7 @@ class RectangleShape: UIView {
     func setup() {
         //backgroundColor = UIColor.clear
         shapeReference = createRectangle()
+//        tag = 0
     }
     
     func createRectangle() -> UIBezierPath {

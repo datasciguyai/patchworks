@@ -146,10 +146,10 @@
             </objects>
             <point key="canvasLocation" x="-212" y="131"/>
         </scene>
-        <!--View Controller-->
+        <!--Block View Controller-->
         <scene sceneID="qgd-xZ-Jew">
             <objects>
-                <viewController id="yzi-rc-aw2" sceneMemberID="viewController">
+                <viewController id="yzi-rc-aw2" customClass="BlockViewController" customModule="Patchworks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tEC-nv-ahh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -159,11 +159,27 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rk0-sy-qBi">
+                                <rect key="frame" x="111" y="343" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loadImage:" destination="yzi-rc-aw2" eventType="touchUpInside" id="yzh-yB-h8e"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c5N-4N-FHi">
+                                <rect key="frame" x="49" y="381" width="267" height="227"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="jvj-Rb-Rd0"/>
                     </view>
                     <navigationItem key="navigationItem" id="3T2-a6-Rtf"/>
+                    <connections>
+                        <outlet property="block" destination="2Q7-nY-iuf" id="fV0-vZ-wkK"/>
+                        <outlet property="image" destination="c5N-4N-FHi" id="E05-tY-WYb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMM-vW-OED" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

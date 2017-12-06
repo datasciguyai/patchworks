@@ -12,12 +12,14 @@ class TriangleShape: UIView {
     
     var shapeReference = UIBezierPath()
     var color = UIColor()
-    //        {
-    //            didSet {
-    //                setNeedsDisplay()
-    //            }
-    //        }
     var rotation = CGFloat()
+    var image: UIImage? {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    weak var delegate: TriangleShapeDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,21 +43,30 @@ class TriangleShape: UIView {
     }
     
     func drawTriangle() -> UIBezierPath {
-        //        guard let context = UIGraphicsGetCurrentContext() else {
-        //            return UIBezierPath()
-        //        }
-        //        context.saveGState()
-        //        shapeReference.apply(CGAffineTransform(translationX: -shapeReference.bounds.minX, y: -shapeReference.bounds.minY))
-        color.set()
-        shapeReference.fill()
-        //        context.restoreGState()
+        if let image = image {
+            if let context = UIGraphicsGetCurrentContext()  {
+                context.saveGState()
+                shapeReference.addClip()
+                context.scaleBy(x: 1, y: -1)
+                context.draw(image.cgImage!, in: CGRect(x: bounds.minX, y: bounds.minY, width: image.size.width, height: image.size.height), byTiling: true)
+                context.restoreGState()
+            }
+        } else {
+            shapeReference.lineWidth = 5.0
+            color.set()
+            UIColor.red.setStroke()
+            shapeReference.fill()
+            shapeReference.stroke()
+        }
         return shapeReference
     }
     
     func setup() {
+        backgroundColor = UIColor.clear
         shapeReference = createTriangle()
         frame = CGRect(x: frame.minX, y: frame.minY, width: shapeReference.bounds.width, height: shapeReference.bounds.height)
         shapeReference.apply(CGAffineTransform(translationX: -shapeReference.bounds.minX, y: -shapeReference.bounds.minY))
+//        tag = 1
     }
     
     func createTriangle() -> UIBezierPath {
@@ -72,8 +83,13 @@ class TriangleShape: UIView {
         guard shapeReference.contains(point) else {
             return nil
         }
-        color = UIColor.yellow
+        //color = UIColor.yellow
+        delegate?.onShapeClicked(self)
         setNeedsDisplay()
         return self
     }
+}
+
+protocol TriangleShapeDelegate: class {
+    func onShapeClicked(_ sender: TriangleShape)
 }

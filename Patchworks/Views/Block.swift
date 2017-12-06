@@ -11,7 +11,13 @@ import UIKit
 @IBDesignable
 class Block: UIView {
     
-    var t = TriangleShape(frame: CGRect(x: 0, y: 0, width: 300, height: 100), rotation: CGFloat(42.0), color: UIColor.blue)
+    var t = TriangleShape(frame: CGRect(x: 0, y: 0, width: 300, height: 100), rotation: CGFloat(0.0), color: UIColor.blue)
+    
+    weak var blockVC: BlockViewController? {
+        didSet {
+            t.delegate = blockVC
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,10 +35,7 @@ class Block: UIView {
         if let touch = touches.first {
             if let t = hitTest(touch.location(in: self), with: event) {
                 if t != self {
-                    print("Success!")
-                    let p = t as? TriangleShape
-                    //                    p?.color = UIColor.yellow
-                    //                    p?.setNeedsDisplay()
+                    print("Success")
                 }
             }
         }
