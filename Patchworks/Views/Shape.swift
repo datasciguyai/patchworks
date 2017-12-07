@@ -1,17 +1,22 @@
 //
-//  TriangleShape.swift
+//  Shape.swift
 //  Patchworks
 //
-//  Created by Jeremy Reynolds on 10/26/17.
+//  Created by Jeremy Reynolds on 12/6/17.
 //  Copyright © 2017 Jeremy Reynolds. All rights reserved.
 //
 
 import UIKit
 
-class TriangleShape: UIView {
+class Shape: UIView {
     
-    var shapeReference = UIBezierPath()
-    var color = UIColor()
+    enum shape {
+        case rectangle
+        case triangle
+    }
+    
+    var shapePath = UIBezierPath()
+    var shapeColor = UIColor()
     var rotation = CGFloat()
     var image: UIImage? {
         didSet {
@@ -19,7 +24,7 @@ class TriangleShape: UIView {
         }
     }
     
-    weak var delegate: TriangleShapeDelegate?
+    weak var delegate: ShapeDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,45 +36,49 @@ class TriangleShape: UIView {
         setup()
     }
     
-    convenience init(frame: CGRect, rotation: CGFloat, color: UIColor) {
+    convenience init(frame: CGRect, rotation: CGFloat, color: UIColor, shapeType: shape) {
         self.init(frame: frame)
         self.rotation = rotation
-        self.color = color
-        setup()
+        self.shapeColor = color
+        setup(shape: shapeType)
     }
     
     override func draw(_ rect: CGRect) {
-        let _ = drawTriangle()
+        let _ = drawShape()
     }
     
-    func drawTriangle() -> UIBezierPath {
+    func drawShape() -> UIBezierPath {
         if let image = image {
             if let context = UIGraphicsGetCurrentContext()  {
                 context.saveGState()
-                shapeReference.addClip()
+                shapePath.addClip()
                 context.scaleBy(x: 1, y: -1)
                 context.draw(image.cgImage!, in: CGRect(x: bounds.minX, y: bounds.minY, width: CGFloat(200), height: CGFloat(200)), byTiling: true)
                 context.restoreGState()
                 UIColor.black.setStroke()
-                shapeReference.lineCapStyle = .round
-                shapeReference.lineJoinStyle = .round
-                shapeReference.stroke()
+                shapePath.lineCapStyle = .round
+                shapePath.lineJoinStyle = .round
+                shapePath.stroke()
             }
         } else {
-            shapeReference.lineWidth = 5.0
-            color.set()
+            shapePath.lineWidth = 5.0
+            shapeColor.set()
             UIColor.black.setStroke()
-            shapeReference.fill()
-            shapeReference.stroke()
+            shapePath.fill()
+            shapePath.stroke()
         }
-        return shapeReference
+        return shapePath
     }
     
-    func setup() {
+    func setup(shape: shape = .rectangle) {
         backgroundColor = UIColor.clear
-        shapeReference = createTriangle()
-        frame = CGRect(x: frame.minX, y: frame.minY, width: shapeReference.bounds.width, height: shapeReference.bounds.height)
-        shapeReference.apply(CGAffineTransform(translationX: -shapeReference.bounds.minX, y: -shapeReference.bounds.minY))
+        if shape == .triangle {
+            shapePath = createTriangle()
+        } else {
+            shapePath = createRectangle()
+        }
+        frame = CGRect(x: frame.minX, y: frame.minY, width: shapePath.bounds.width, height: shapePath.bounds.height)
+        shapePath.apply(CGAffineTransform(translationX: -shapePath.bounds.minX, y: -shapePath.bounds.minY))
     }
     
     func createTriangle() -> UIBezierPath {
@@ -83,16 +92,23 @@ class TriangleShape: UIView {
         return trianglePath
     }
     
+    func createRectangle() -> UIBezierPath {
+        let rectanglePath = UIBezierPath(rect: bounds)
+        let pathTransform = CGAffineTransform(rotationAngle: -rotation * CGFloat.pi / 180)
+        rectanglePath.apply(pathTransform.concatenating(CGAffineTransform(translationX: bounds.midX, y: bounds.midY)))
+        return rectanglePath
+    }
+    
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        guard shapeReference.contains(point) else {
+        guard shapePath.contains(point) else {
             return nil
         }
-        delegate?.onShapeClicked(self)
+        delegate?.shapeClicked(self)
         setNeedsDisplay()
         return self
     }
 }
 
-protocol TriangleShapeDelegate: class {
-    func onShapeClicked(_ sender: TriangleShape)
+protocol ShapeDelegate: class {
+    func shapeClicked(_ sender: Shape)
 }

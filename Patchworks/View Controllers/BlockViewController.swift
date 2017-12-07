@@ -8,28 +8,20 @@
 
 import UIKit
 
-class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TriangleShapeDelegate {
+class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ShapeDelegate {
+    
+    func shapeClicked(_ sender: Shape) {
+        s = sender
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
     
     @IBOutlet weak var block: Block!
     
     let imagePicker = UIImagePickerController()
-    
-    var t = TriangleShape()
-    
-    @IBOutlet weak var image: UIImageView!
-    
-    @IBAction func loadImage(_ sender: UIButton) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func onShapeClicked(_ sender: TriangleShape) {
-        t = sender
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-    }
+
+    var s = Shape()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +31,7 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            image.contentMode = .scaleToFill
-            image.image = pickedImage
-            t.image = pickedImage
+            s.image = pickedImage
         }
         dismiss(animated: true, completion: nil)
     }
@@ -49,15 +39,4 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
