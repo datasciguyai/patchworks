@@ -16,6 +16,7 @@
 		3F4032AA1FA0F2FC00EAEBE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4032A81FA0F2FC00EAEBE9 /* LaunchScreen.storyboard */; };
 		3F80ED531FD734BA0038022B /* RectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F80ED521FD734BA0038022B /* RectangleShape.swift */; };
 		3F87D1C31FD8950B003AC8F5 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87D1C21FD8950B003AC8F5 /* Shape.swift */; };
+		3FF8CBDA1FD9A93000CADA77 /* LogCabinBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8CBD91FD9A93000CADA77 /* LogCabinBlock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3F4032AB1FA0F2FC00EAEBE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F80ED521FD734BA0038022B /* RectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleShape.swift; sourceTree = "<group>"; };
 		3F87D1C21FD8950B003AC8F5 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		3FF8CBD91FD9A93000CADA77 /* LogCabinBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCabinBlock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 				3F80ED521FD734BA0038022B /* RectangleShape.swift */,
 				3F08D94D1FA232880078BAF2 /* TriangleShape.swift */,
 				3F87D1C21FD8950B003AC8F5 /* Shape.swift */,
+				3FF8CBD91FD9A93000CADA77 /* LogCabinBlock.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F80ED531FD734BA0038022B /* RectangleShape.swift in Sources */,
+				3FF8CBDA1FD9A93000CADA77 /* LogCabinBlock.swift in Sources */,
 				3F87D1C31FD8950B003AC8F5 /* Shape.swift in Sources */,
 				3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */,
 				3F2E103C1FD84CC400AFFC10 /* Block.swift in Sources */,

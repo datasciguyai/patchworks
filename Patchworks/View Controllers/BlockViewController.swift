@@ -17,7 +17,7 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
         present(imagePicker, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var block: Block!
+    @IBOutlet weak var block: LogCabinBlock!
     
     let imagePicker = UIImagePickerController()
 

@@ -8,7 +8,11 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
+
+
+//Basket Weave
+
 class Block: UIView {
     
     var r1 = Shape()
