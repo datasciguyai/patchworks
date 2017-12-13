@@ -17,6 +17,7 @@ class Shape: UIView {
     
     var shapePath = UIBezierPath()
     var shapeColor = UIColor()
+    var color2 = UIColor()
     var rotation = CGFloat()
     var image: UIImage? {
         didSet {
@@ -26,20 +27,21 @@ class Shape: UIView {
     
     weak var delegate: ShapeDelegate?
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setup()
+//    }
     
     convenience init(frame: CGRect, rotation: CGFloat, color: UIColor, shapeType: shape) {
         self.init(frame: frame)
         self.rotation = rotation
         self.shapeColor = color
+        self.color2 = shapeColor.withAlphaComponent(0.3)
         setup(shape: shapeType)
     }
     
@@ -48,23 +50,22 @@ class Shape: UIView {
     }
     
     func drawShape() -> UIBezierPath {
-        if let image = image {
+        if let image = image?.cgImage {
             if let context = UIGraphicsGetCurrentContext()  {
                 context.saveGState()
                 shapePath.addClip()
                 context.scaleBy(x: 1, y: -1)
-                context.draw(image.cgImage!, in: CGRect(x: bounds.minX, y: bounds.minY, width: CGFloat(200), height: CGFloat(200)), byTiling: true)
+                context.draw(image, in: CGRect(x: bounds.minX, y: bounds.minY, width: CGFloat(200), height: CGFloat(200)), byTiling: true)
                 context.restoreGState()
-                UIColor.black.setStroke()
-                shapePath.lineCapStyle = .round
-                shapePath.lineJoinStyle = .round
-                shapePath.stroke()
+//                UIColor.black.setStroke()
+//                shapePath.lineJoinStyle = .round
+//                shapePath.stroke()
             }
         } else {
             shapePath.lineWidth = 5.0
-            shapeColor.set()
-            UIColor.black.setStroke()
+            color2.setFill()
             shapePath.fill()
+            shapeColor.setStroke()
             shapePath.stroke()
         }
         return shapePath

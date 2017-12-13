@@ -27,7 +27,6 @@ class LogCabinBlock: UIView {
     var r12 = Shape()
     var r13 = Shape()
     
-    
     weak var blockVC: BlockViewController? {
         didSet {
             r1.delegate = blockVC
@@ -46,18 +45,8 @@ class LogCabinBlock: UIView {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
     override func draw(_ rect: CGRect) {
-        addSubview(r1)
+//        addSubview(r1)
         addSubview(r2)
         addSubview(r3)
         addSubview(r4)
@@ -72,19 +61,36 @@ class LogCabinBlock: UIView {
         addSubview(r13)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        setup()
+        r1.delegate = blockVC
+    }
+    
+    let color = UIColor(red: 0.889, green: 0.000, blue: 1.000, alpha: 1.000)
+    
     func setup() {
-        r1 = Shape(frame: CGRect(x: bounds.minX, y: bounds.minY, width: bounds.maxX * 0.875, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r2 = Shape(frame: CGRect(x: bounds.maxX * 0.875, y: bounds.minY, width: bounds.maxX * 0.125, height: bounds.maxY), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r3 = Shape(frame: CGRect(x: bounds.minX, y: bounds.maxY * 0.875, width: bounds.maxX * 0.875, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r4 = Shape(frame: CGRect(x: bounds.minX, y: bounds.maxY * 0.125, width: bounds.maxX * 0.125, height: bounds.maxY * 0.75), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r5 = Shape(frame: CGRect(x: bounds.maxX * 0.125, y: bounds.maxY * 0.125, width: bounds.maxX * 0.125, height: bounds.maxY * 0.625), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r6 = Shape(frame: CGRect(x: bounds.maxX * 0.25, y: bounds.maxY * 0.125, width: bounds.maxX * 0.50, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r7 = Shape(frame: CGRect(x: bounds.maxX * 0.75, y: bounds.maxY * 0.125, width: bounds.maxX * 0.125, height: bounds.maxY * 0.75), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r8 = Shape(frame: CGRect(x: bounds.maxX * 0.125, y: bounds.maxY * 0.75, width: bounds.maxX * 0.625, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r9 = Shape(frame: CGRect(x: bounds.maxX * 0.25, y: bounds.maxY * 0.625, width: bounds.maxX * 0.375, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r10 = Shape(frame: CGRect(x: bounds.maxX * 0.25, y: bounds.maxY * 0.25, width: bounds.maxX * 0.125, height: bounds.maxY * 0.375), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r11 = Shape(frame: CGRect(x: bounds.maxX * 0.375, y: bounds.maxY * 0.25, width: bounds.maxX * 0.25, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r12 = Shape(frame: CGRect(x: bounds.maxX * 0.625, y: bounds.maxY * 0.25, width: bounds.maxX * 0.125, height: bounds.maxY * 0.50), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
-        r13 = Shape(frame: CGRect(x: bounds.maxX * 0.375, y: bounds.maxY * 0.375, width: bounds.maxX * 0.25, height: bounds.maxY * 0.25), rotation: CGFloat(0.0), color: UIColor.red, shapeType: .rectangle)
+        r1 = Shape(frame: CGRect(x: bounds.maxX * 0.875, y: bounds.minY, width: bounds.maxX * 0.125, height: bounds.maxY), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        addSubview(r1)
+        r2 = Shape(frame: CGRect(x: bounds.minX, y: bounds.maxY * 0.875, width: bounds.maxX * 0.875, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r3 = Shape(frame: CGRect(x: bounds.minX, y: bounds.minY, width: bounds.maxX * 0.125, height: bounds.maxY * 0.875), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r4 = Shape(frame: CGRect(x: bounds.maxX * 0.125, y: bounds.minY, width: bounds.maxX * 0.75, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r5 = Shape(frame: CGRect(x: bounds.maxX * 0.75, y: bounds.maxY * 0.125, width: bounds.maxX * 0.125, height: bounds.maxY * 0.75), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r6 = Shape(frame: CGRect(x: bounds.maxX * 0.125, y: bounds.maxY * 0.75, width: bounds.maxX * 0.625, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r7 = Shape(frame: CGRect(x: bounds.maxX * 0.125, y: bounds.maxY * 0.125, width: bounds.maxX * 0.125, height: bounds.maxY * 0.625), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r8 = Shape(frame: CGRect(x: bounds.maxX * 0.25, y: bounds.maxY * 0.125, width: bounds.maxX * 0.50, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r9 = Shape(frame: CGRect(x: bounds.maxX * 0.625, y: bounds.maxY * 0.25, width: bounds.maxX * 0.125, height: bounds.maxY * 0.50), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r10 = Shape(frame: CGRect(x: bounds.maxX * 0.25, y: bounds.maxY * 0.625, width: bounds.maxX * 0.375, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r11 = Shape(frame: CGRect(x: bounds.maxX * 0.25, y: bounds.maxY * 0.25, width: bounds.maxX * 0.125, height: bounds.maxY * 0.375), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r12 = Shape(frame: CGRect(x: bounds.maxX * 0.375, y: bounds.maxY * 0.25, width: bounds.maxX * 0.25, height: bounds.maxY * 0.125), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
+        r13 = Shape(frame: CGRect(x: bounds.maxX * 0.375, y: bounds.maxY * 0.375, width: bounds.maxX * 0.25, height: bounds.maxY * 0.25), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
     }
 }

@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -112,14 +113,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Q7-nY-iuf" customClass="LogCabinBlock" customModule="Patchworks" customModuleProvider="target">
-                                <rect key="frame" x="36" y="81" width="315" height="315"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q7-nY-iuf" customClass="ChurnDashBlock" customModule="Patchworks" customModuleProvider="target">
+                                <rect key="frame" x="8" y="72" width="359" height="359"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2Q7-nY-iuf" secondAttribute="height" multiplier="1:1" id="BDH-hi-Ckk"/>
+                                </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xXq-ua-mEY">
-                                <rect key="frame" x="28" y="451" width="359" height="194"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xXq-ua-mEY">
+                                <rect key="frame" x="8" y="465" width="359" height="194"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -127,6 +128,15 @@
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jvj-Rb-Rd0" firstAttribute="trailing" secondItem="xXq-ua-mEY" secondAttribute="trailing" constant="8" id="9Kb-M2-xsd"/>
+                            <constraint firstItem="xXq-ua-mEY" firstAttribute="leading" secondItem="jvj-Rb-Rd0" secondAttribute="leading" constant="8" id="Mqz-Xr-eoJ"/>
+                            <constraint firstItem="2Q7-nY-iuf" firstAttribute="leading" secondItem="jvj-Rb-Rd0" secondAttribute="leading" constant="8" id="ZS1-zv-P0g"/>
+                            <constraint firstItem="xXq-ua-mEY" firstAttribute="top" secondItem="2Q7-nY-iuf" secondAttribute="bottom" constant="34" id="l0w-fp-3Bo"/>
+                            <constraint firstItem="jvj-Rb-Rd0" firstAttribute="bottom" secondItem="xXq-ua-mEY" secondAttribute="bottom" constant="8" id="lla-in-zng"/>
+                            <constraint firstItem="2Q7-nY-iuf" firstAttribute="top" secondItem="jvj-Rb-Rd0" secondAttribute="top" constant="8" id="pQF-kY-Dns"/>
+                            <constraint firstItem="jvj-Rb-Rd0" firstAttribute="trailing" secondItem="2Q7-nY-iuf" secondAttribute="trailing" constant="8" id="qk8-VB-KHK"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jvj-Rb-Rd0"/>
                     </view>
                     <navigationItem key="navigationItem" id="3T2-a6-Rtf"/>
