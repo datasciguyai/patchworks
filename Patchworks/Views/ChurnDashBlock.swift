@@ -77,10 +77,9 @@ class ChurnDashBlock: UIView {
     let color = UIColor(red: 0.889, green: 0.000, blue: 1.000, alpha: 1.000)
     
     func setup() {
-        let triangleX = bounds.maxX / 3
-        let triangleY = bounds.maxY / 3
-        let triangleWidth = CGFloat(sqrt((triangleX*triangleX) + (triangleY*triangleY)))
-        let triangleHeight = CGFloat(sqrt((triangleX*triangleX) + (triangleY*triangleY))) / 2
+        
+        let triangleWidth = CGFloat(sqrt((bounds.maxX / 3 * bounds.maxX / 3) + (bounds.maxY / 3 * bounds.maxY / 3)))
+        let triangleHeight = triangleWidth / 2
         
         t1 = Shape(frame: CGRect(x: bounds.minX, y: bounds.minY, width: triangleWidth, height: triangleHeight), rotation: CGFloat(45.0), color: color, shapeType: .triangle)
         t2 = Shape(frame: CGRect(x: bounds.minX, y: bounds.minY, width: triangleWidth, height: triangleHeight), rotation: CGFloat(225.0), color: color, shapeType: .triangle)
@@ -100,7 +99,5 @@ class ChurnDashBlock: UIView {
         r7 = Shape(frame: CGRect(x: bounds.maxX / 1.2, y: bounds.maxY / 3, width: bounds.maxX / 6, height: bounds.maxY / 3), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
         r8 = Shape(frame: CGRect(x: bounds.maxX / 3, y: bounds.maxY / 1.5, width: bounds.maxX / 3, height: bounds.maxY / 6), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
         r9 = Shape(frame: CGRect(x: bounds.maxX / 3, y: bounds.maxY / 1.2, width: bounds.maxX / 3, height: bounds.maxY / 6), rotation: CGFloat(0.0), color: color, shapeType: .rectangle)
-        
-        
     }
 }

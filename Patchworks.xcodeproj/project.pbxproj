@@ -11,6 +11,7 @@
 		3F2E103C1FD84CC400AFFC10 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103B1FD84CC400AFFC10 /* Block.swift */; };
 		3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */; };
 		3F30B80B1FDB33060013775A /* ChurnDashBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30B80A1FDB33060013775A /* ChurnDashBlock.swift */; };
+		3F3D928F1FE1B7300013F743 /* DoubleCrossBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D928E1FE1B7300013F743 /* DoubleCrossBlock.swift */; };
 		3F4032A01FA0F2FC00EAEBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40329F1FA0F2FC00EAEBE9 /* AppDelegate.swift */; };
 		3F4032A51FA0F2FC00EAEBE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4032A31FA0F2FC00EAEBE9 /* Main.storyboard */; };
 		3F4032A71FA0F2FC00EAEBE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F4032A61FA0F2FC00EAEBE9 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		3F2E103B1FD84CC400AFFC10 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewController.swift; sourceTree = "<group>"; };
 		3F30B80A1FDB33060013775A /* ChurnDashBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurnDashBlock.swift; sourceTree = "<group>"; };
+		3F3D928E1FE1B7300013F743 /* DoubleCrossBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCrossBlock.swift; sourceTree = "<group>"; };
 		3F40329C1FA0F2FC00EAEBE9 /* Patchworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patchworks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F40329F1FA0F2FC00EAEBE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F4032A41FA0F2FC00EAEBE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				3F87D1C21FD8950B003AC8F5 /* Shape.swift */,
 				3FF8CBD91FD9A93000CADA77 /* LogCabinBlock.swift */,
 				3F30B80A1FDB33060013775A /* ChurnDashBlock.swift */,
+				3F3D928E1FE1B7300013F743 /* DoubleCrossBlock.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			files = (
 				3F80ED531FD734BA0038022B /* RectangleShape.swift in Sources */,
 				3FF8CBDA1FD9A93000CADA77 /* LogCabinBlock.swift in Sources */,
+				3F3D928F1FE1B7300013F743 /* DoubleCrossBlock.swift in Sources */,
 				3F30B80B1FDB33060013775A /* ChurnDashBlock.swift in Sources */,
 				3F87D1C31FD8950B003AC8F5 /* Shape.swift in Sources */,
 				3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */,

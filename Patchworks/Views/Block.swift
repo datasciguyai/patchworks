@@ -8,7 +8,7 @@
 
 import UIKit
 
-//@IBDesignable
+@IBDesignable
 
 
 //Basket Weave
@@ -68,6 +68,10 @@ class Block: UIView {
         addSubview(r10)
         addSubview(r11)
         addSubview(r12)
+    }
+    
+    override func layoutSubviews() {
+        setup()
     }
     
     func setup() {
