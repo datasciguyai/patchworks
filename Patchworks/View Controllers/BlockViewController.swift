@@ -17,7 +17,8 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
         present(imagePicker, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var block: DoubleCrossBlock!
+    
+    @IBOutlet weak var block: BasketWeaveBlock!
     
     let imagePicker = UIImagePickerController()
 

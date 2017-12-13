@@ -91,7 +91,8 @@ class DoubleCrossBlock: UIView {
         r4 = Shape(frame: CGRect(x: bounds.minX, y: bounds.maxY / 2, width: rectDiag, height: rectDiag), rotation: CGFloat(45.0), color: color, shapeType: .rectangle)
         r5 = Shape(frame: CGRect(x: bounds.maxX / 2, y: bounds.maxY / 2, width: rectDiag, height: rectDiag), rotation: CGFloat(45.0), color: color, shapeType: .rectangle)
         
-        
     }
+    
+    
     
 }
