@@ -13,20 +13,38 @@
         <!--Title-->
         <scene sceneID="XGp-lB-Kdg">
             <objects>
-                <viewController id="mI3-6I-0KT" sceneMemberID="viewController">
+                <viewController id="mI3-6I-0KT" customClass="BlockViewController" customModule="Patchworks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nuo-ap-3Be">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zhe-PQ-iXt">
+                                <rect key="frame" x="9" y="13" width="350" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CaP-Oy-81m">
+                                <rect key="frame" x="16" y="371" width="343" height="276"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="AQg-Ki-Umw"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="aqr-hd-aY2">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="4Sb-6d-SGr"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="block" destination="Zhe-PQ-iXt" id="d7k-Lx-1HJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iA-G8-BTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2871" y="-191"/>
+            <point key="canvasLocation" x="2869.5999999999999" y="-191.1544227886057"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="dbd-hZ-Ype">
@@ -39,25 +57,34 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7z-Wl-gNZ">
                                 <rect key="frame" x="16" y="90" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Basket Weave"/>
                                 <connections>
-                                    <segue destination="mI3-6I-0KT" kind="show" identifier="toEditNewBlockFromTemplate" id="PFX-fx-Xm9"/>
+                                    <segue destination="mI3-6I-0KT" kind="show" identifier="fromBasketWeaveButton" id="PFX-fx-Xm9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtn-yE-8Dh">
                                 <rect key="frame" x="16" y="273" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Double Cross"/>
+                                <connections>
+                                    <segue destination="mI3-6I-0KT" kind="show" identifier="fromDoubleCrossButton" id="1kQ-Xj-RVv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ue-RP-LYm">
                                 <rect key="frame" x="199" y="90" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Churn Dash"/>
+                                <connections>
+                                    <segue destination="mI3-6I-0KT" kind="show" identifier="fromChurnDashButton" id="5ix-ty-fmo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Yo-se-9Rj">
                                 <rect key="frame" x="199" y="273" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Log Cabin"/>
+                                <connections>
+                                    <segue destination="mI3-6I-0KT" kind="show" identifier="fromLogCabinButton" id="vgs-IQ-xh1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVY-1R-eDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1889" y="-289"/>
+            <point key="canvasLocation" x="1977" y="-259"/>
         </scene>
         <!--My Blocks-->
         <scene sceneID="T0r-z9-c94">
@@ -113,7 +140,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q7-nY-iuf" customClass="BasketWeaveBlock" customModule="Patchworks" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q7-nY-iuf" customClass="BlockView" customModule="Patchworks" customModuleProvider="target">
                                 <rect key="frame" x="8" y="72" width="359" height="359"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2Q7-nY-iuf" secondAttribute="height" multiplier="1:1" id="BDH-hi-Ckk"/>
@@ -146,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMM-vW-OED" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="834.33283358320841"/>
+            <point key="canvasLocation" x="655" y="833"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X55-T4-IY6">
@@ -185,4 +212,7 @@
             <point key="canvasLocation" x="313" y="-89"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="vgs-IQ-xh1"/>
+    </inferredMetricsTieBreakers>
 </document>

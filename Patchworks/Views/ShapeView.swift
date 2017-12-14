@@ -1,5 +1,5 @@
 //
-//  Shape.swift
+//  ShapeView.swift
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/6/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Shape: UIView {
+class ShapeView: UIView {
     
     enum shape {
         case rectangle
@@ -16,8 +16,8 @@ class Shape: UIView {
     }
     
     var shapePath = UIBezierPath()
-    var shapeColor = UIColor()
-    var color2 = UIColor()
+    var strokeColor = UIColor()
+    var fillColor = UIColor()
     var rotation = CGFloat()
     var image: UIImage? {
         didSet {
@@ -27,21 +27,11 @@ class Shape: UIView {
     
     weak var delegate: ShapeDelegate?
     
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        setup()
-//    }
-//
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setup()
-//    }
-    
     convenience init(frame: CGRect, rotation: CGFloat, color: UIColor, shapeType: shape) {
         self.init(frame: frame)
         self.rotation = rotation
-        self.shapeColor = color
-        self.color2 = shapeColor.withAlphaComponent(0.3)
+        self.strokeColor = color
+        self.fillColor = strokeColor.withAlphaComponent(0.3)
         setup(shape: shapeType)
     }
     
@@ -63,9 +53,9 @@ class Shape: UIView {
             }
         } else {
             shapePath.lineWidth = 5.0
-            color2.setFill()
+            fillColor.setFill()
             shapePath.fill()
-            shapeColor.setStroke()
+            strokeColor.setStroke()
             shapePath.stroke()
         }
         return shapePath
@@ -111,5 +101,5 @@ class Shape: UIView {
 }
 
 protocol ShapeDelegate: class {
-    func shapeClicked(_ sender: Shape)
+    func shapeClicked(_ sender: ShapeView)
 }
