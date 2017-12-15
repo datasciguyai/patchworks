@@ -7,26 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F08D94E1FA232880078BAF2 /* TriangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08D94D1FA232880078BAF2 /* TriangleShape.swift */; };
 		3F2E103C1FD84CC400AFFC10 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103B1FD84CC400AFFC10 /* BlockView.swift */; };
 		3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */; };
 		3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */; };
+		3F31F85D1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */; };
+		3F31F85F1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */; };
 		3F3D928F1FE1B7300013F743 /* BlockView+DoubleCross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */; };
 		3F3D92911FE1DA3E0013F743 /* BlockView+BasketWeave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */; };
 		3F4032A01FA0F2FC00EAEBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40329F1FA0F2FC00EAEBE9 /* AppDelegate.swift */; };
 		3F4032A51FA0F2FC00EAEBE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4032A31FA0F2FC00EAEBE9 /* Main.storyboard */; };
 		3F4032A71FA0F2FC00EAEBE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F4032A61FA0F2FC00EAEBE9 /* Assets.xcassets */; };
 		3F4032AA1FA0F2FC00EAEBE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4032A81FA0F2FC00EAEBE9 /* LaunchScreen.storyboard */; };
-		3F80ED531FD734BA0038022B /* RectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F80ED521FD734BA0038022B /* RectangleShape.swift */; };
 		3F87D1C31FD8950B003AC8F5 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87D1C21FD8950B003AC8F5 /* ShapeView.swift */; };
 		3FF8CBDA1FD9A93000CADA77 /* BlockView+LogCabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F08D94D1FA232880078BAF2 /* TriangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleShape.swift; sourceTree = "<group>"; };
 		3F2E103B1FD84CC400AFFC10 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewController.swift; sourceTree = "<group>"; };
 		3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+ChurnDash.swift"; sourceTree = "<group>"; };
+		3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeView+Triangle.swift"; sourceTree = "<group>"; };
+		3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeView+Rectangle.swift"; sourceTree = "<group>"; };
 		3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+DoubleCross.swift"; sourceTree = "<group>"; };
 		3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+BasketWeave.swift"; sourceTree = "<group>"; };
 		3F40329C1FA0F2FC00EAEBE9 /* Patchworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patchworks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,7 +36,6 @@
 		3F4032A61FA0F2FC00EAEBE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F4032A91FA0F2FC00EAEBE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F4032AB1FA0F2FC00EAEBE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F80ED521FD734BA0038022B /* RectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleShape.swift; sourceTree = "<group>"; };
 		3F87D1C21FD8950B003AC8F5 /* ShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
 		3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+LogCabin.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,9 +59,9 @@
 				3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */,
 				3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */,
 				3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */,
-				3F80ED521FD734BA0038022B /* RectangleShape.swift */,
 				3F87D1C21FD8950B003AC8F5 /* ShapeView.swift */,
-				3F08D94D1FA232880078BAF2 /* TriangleShape.swift */,
+				3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */,
+				3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,16 +192,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F80ED531FD734BA0038022B /* RectangleShape.swift in Sources */,
 				3FF8CBDA1FD9A93000CADA77 /* BlockView+LogCabin.swift in Sources */,
 				3F3D928F1FE1B7300013F743 /* BlockView+DoubleCross.swift in Sources */,
+				3F31F85D1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift in Sources */,
 				3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */,
 				3F3D92911FE1DA3E0013F743 /* BlockView+BasketWeave.swift in Sources */,
 				3F87D1C31FD8950B003AC8F5 /* ShapeView.swift in Sources */,
 				3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */,
+				3F31F85F1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift in Sources */,
 				3F2E103C1FD84CC400AFFC10 /* BlockView.swift in Sources */,
 				3F4032A01FA0F2FC00EAEBE9 /* AppDelegate.swift in Sources */,
-				3F08D94E1FA232880078BAF2 /* TriangleShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

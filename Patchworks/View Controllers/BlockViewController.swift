@@ -15,7 +15,6 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     let imagePicker = UIImagePickerController()
     var shape = ShapeView()
     
-    
     func shapeClicked(_ sender: ShapeView) {
         shape = sender
         imagePicker.allowsEditing = false
@@ -25,10 +24,11 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        block.blockStyle = .basketWeave
         imagePicker.delegate = self
+        block.blockStyle = .churnDash
         block.blockVC = self
     }
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {

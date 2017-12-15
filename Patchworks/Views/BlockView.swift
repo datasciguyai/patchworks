@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class BlockView: UIView {
 
     enum block {
@@ -40,7 +39,13 @@ class BlockView: UIView {
         }
     }()
     
+//    convenience init(blockStyle: block) {
+//        self.init()
+//        self.blockStyle = blockStyle
+//    }
+    
     override func layoutSubviews() {
+        super.layoutSubviews()
         guard let shapes = shapes else {
             return
         }
