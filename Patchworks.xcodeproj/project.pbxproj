@@ -12,6 +12,7 @@
 		3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */; };
 		3F31F85D1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */; };
 		3F31F85F1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */; };
+		3F31F8631FE43E0C00BD2BD5 /* BlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F8621FE43E0C00BD2BD5 /* BlockController.swift */; };
 		3F3D928F1FE1B7300013F743 /* BlockView+DoubleCross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */; };
 		3F3D92911FE1DA3E0013F743 /* BlockView+BasketWeave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */; };
 		3F4032A01FA0F2FC00EAEBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40329F1FA0F2FC00EAEBE9 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 		3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+ChurnDash.swift"; sourceTree = "<group>"; };
 		3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeView+Triangle.swift"; sourceTree = "<group>"; };
 		3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeView+Rectangle.swift"; sourceTree = "<group>"; };
+		3F31F8621FE43E0C00BD2BD5 /* BlockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockController.swift; sourceTree = "<group>"; };
 		3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+DoubleCross.swift"; sourceTree = "<group>"; };
 		3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+BasketWeave.swift"; sourceTree = "<group>"; };
 		3F40329C1FA0F2FC00EAEBE9 /* Patchworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patchworks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,21 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		3F31F8601FE43DB000BD2BD5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F31F8611FE43DBC00BD2BD5 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F31F8621FE43E0C00BD2BD5 /* BlockController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
 		3F4032931FA0F2FC00EAEBE9 = {
 			isa = PBXGroup;
 			children = (
@@ -93,11 +110,13 @@
 		3F40329E1FA0F2FC00EAEBE9 /* Patchworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F2E103D1FD84F7200AFFC10 /* View Controllers */,
 				3F4032AB1FA0F2FC00EAEBE9 /* Info.plist */,
 				3F40329F1FA0F2FC00EAEBE9 /* AppDelegate.swift */,
+				3F31F8611FE43DBC00BD2BD5 /* Model Controllers */,
+				3F31F8601FE43DB000BD2BD5 /* Models */,
 				3F4032B21FA0F37F00EAEBE9 /* Resources */,
 				3F4032B11FA0F36500EAEBE9 /* Storyboards */,
+				3F2E103D1FD84F7200AFFC10 /* View Controllers */,
 				3F08D94C1FA232600078BAF2 /* Views */,
 			);
 			path = Patchworks;
@@ -201,6 +220,7 @@
 				3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */,
 				3F31F85F1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift in Sources */,
 				3F2E103C1FD84CC400AFFC10 /* BlockView.swift in Sources */,
+				3F31F8631FE43E0C00BD2BD5 /* BlockController.swift in Sources */,
 				3F4032A01FA0F2FC00EAEBE9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
