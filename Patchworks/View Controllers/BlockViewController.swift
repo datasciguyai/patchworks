@@ -11,9 +11,20 @@ import UIKit
 class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ShapeDelegate {
     
     var block: BlockView?
+    var blockStyle: BlockView.block?
     
     let imagePicker = UIImagePickerController()
     var shape = ShapeView()
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        // Make image smaller
+        UIGraphicsBeginImageContext((block?.bounds.size)!)
+        block?.drawHierarchy(in: (block?.bounds)!, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let b = Block(blockView: block!, previewImage: image!)
+        BlockController.blocks.append(b)
+    }
     
     func shapeClicked(_ sender: ShapeView) {
         shape = sender
@@ -25,8 +36,8 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-        block = BlockView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        block?.blockStyle = .churnDash
+        block = BlockView(blockStyle: blockStyle!)
+//        block?.blockStyle = .churnDash
         block?.blockVC = self
         block?.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(block!)

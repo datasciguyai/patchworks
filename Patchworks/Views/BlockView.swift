@@ -39,12 +39,17 @@ class BlockView: UIView {
         }
     }()
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//    }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(blockStyle: BlockView.block) {
+        self.init()
+        self.blockStyle = blockStyle
     }
     
     override func layoutSubviews() {
