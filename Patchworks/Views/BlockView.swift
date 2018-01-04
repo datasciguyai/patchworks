@@ -22,10 +22,10 @@ class BlockView: UIView {
     var blockPattern: BlockView.BlockPattern?
     
     lazy var shapes: [ShapeView]? = {
-        guard let blockP = blockPattern else {
+        guard let blockPattern = blockPattern else {
             return nil
         }
-        switch blockP {
+        switch blockPattern {
         case .basketWeave:
             return basketWeave
         case .churnDash:

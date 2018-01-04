@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="2869.5999999999999" y="-191.1544227886057"/>
         </scene>
-        <!--Stock Block View Controller-->
+        <!--Predefined Block View Controller-->
         <scene sceneID="dbd-hZ-Ype">
             <objects>
-                <viewController id="ntW-p8-mcx" customClass="StockBlockViewController" customModule="Patchworks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ntW-p8-mcx" customClass="PredefinedBlockViewController" customModule="Patchworks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dkc-Qb-g4Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

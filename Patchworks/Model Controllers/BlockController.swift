@@ -15,17 +15,16 @@ class BlockController {
     
     var blocks = [Block]()
     
-    //    init() {
-    //        blocks = fetchBlocks()
-    //    }
+    init() {
+        blocks = fetchBlocks()
+    }
     
     // MARK: - C.R.U.D.
     
-    // MARK: - Add
+    // MARK: - Create
     
-    func add() {
-        //        guard let notes = notes, let due = due else { return }
-        //        tasks.append(Task(name: name, notes: notes, due: due))
+    func add(block: Block) {
+        blocks.append(block)
         saveToPersistentStore()
         blocks = fetchBlocks()
     }
@@ -45,8 +44,8 @@ class BlockController {
     // MARK: - Update
     
     func update(block: Block, previewImage: UIImage) {
-//        guard let blockIndex = blocks.index(of: block) else { return }
-//        blocks[blockIndex].previewImage = previewImage
+        guard let blockIndex = blocks.index(of: block) else { return }
+        blocks[blockIndex].previewImage = UIImagePNGRepresentation(previewImage)
         saveToPersistentStore()
         blocks = fetchBlocks()
     }

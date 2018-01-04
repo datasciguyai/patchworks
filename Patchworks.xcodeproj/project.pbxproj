@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0472F71FFDE16700B3C983 /* ShapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0472F61FFDE16700B3C983 /* ShapeController.swift */; };
+		3F0472F91FFDE23800B3C983 /* Shape+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0472F81FFDE23800B3C983 /* Shape+Convenience.swift */; };
 		3F2E103C1FD84CC400AFFC10 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103B1FD84CC400AFFC10 /* BlockView.swift */; };
 		3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */; };
 		3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */; };
@@ -25,12 +27,14 @@
 		3FBACECC1FEACE4E002E2250 /* Block+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACECB1FEACE4E002E2250 /* Block+Convenience.swift */; };
 		3FBACECE1FEB06B3002E2250 /* BlockCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACECD1FEB06B3002E2250 /* BlockCollectionViewController.swift */; };
 		3FBACED01FEB086B002E2250 /* BlockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACECF1FEB086B002E2250 /* BlockCollectionViewCell.swift */; };
-		3FBACED21FEB6809002E2250 /* StockBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED11FEB6809002E2250 /* StockBlockViewController.swift */; };
+		3FBACED21FEB6809002E2250 /* PredefinedBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED11FEB6809002E2250 /* PredefinedBlockViewController.swift */; };
 		3FBACED41FFD714B002E2250 /* UIColor+ShapeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */; };
 		3FF8CBDA1FD9A93000CADA77 /* BlockView+LogCabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F0472F61FFDE16700B3C983 /* ShapeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeController.swift; sourceTree = "<group>"; };
+		3F0472F81FFDE23800B3C983 /* Shape+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+Convenience.swift"; sourceTree = "<group>"; };
 		3F2E103B1FD84CC400AFFC10 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewController.swift; sourceTree = "<group>"; };
 		3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+ChurnDash.swift"; sourceTree = "<group>"; };
@@ -51,7 +55,7 @@
 		3FBACECB1FEACE4E002E2250 /* Block+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Block+Convenience.swift"; sourceTree = "<group>"; };
 		3FBACECD1FEB06B3002E2250 /* BlockCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCollectionViewController.swift; sourceTree = "<group>"; };
 		3FBACECF1FEB086B002E2250 /* BlockCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCollectionViewCell.swift; sourceTree = "<group>"; };
-		3FBACED11FEB6809002E2250 /* StockBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockBlockViewController.swift; sourceTree = "<group>"; };
+		3FBACED11FEB6809002E2250 /* PredefinedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedBlockViewController.swift; sourceTree = "<group>"; };
 		3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ShapeColor.swift"; sourceTree = "<group>"; };
 		3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+LogCabin.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,7 +93,7 @@
 			children = (
 				3FBACECD1FEB06B3002E2250 /* BlockCollectionViewController.swift */,
 				3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */,
-				3FBACED11FEB6809002E2250 /* StockBlockViewController.swift */,
+				3FBACED11FEB6809002E2250 /* PredefinedBlockViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -99,6 +103,7 @@
 			children = (
 				3FBACECB1FEACE4E002E2250 /* Block+Convenience.swift */,
 				3FBACEC91FEACDF6002E2250 /* CoreDataStack.swift */,
+				3F0472F81FFDE23800B3C983 /* Shape+Convenience.swift */,
 				3FBACEC61FE9B626002E2250 /* Patchworks.xcdatamodeld */,
 			);
 			path = Models;
@@ -108,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				3F31F8621FE43E0C00BD2BD5 /* BlockController.swift */,
+				3F0472F61FFDE16700B3C983 /* ShapeController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -232,9 +238,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0472F71FFDE16700B3C983 /* ShapeController.swift in Sources */,
 				3FF8CBDA1FD9A93000CADA77 /* BlockView+LogCabin.swift in Sources */,
 				3FBACECC1FEACE4E002E2250 /* Block+Convenience.swift in Sources */,
-				3FBACED21FEB6809002E2250 /* StockBlockViewController.swift in Sources */,
+				3FBACED21FEB6809002E2250 /* PredefinedBlockViewController.swift in Sources */,
 				3FBACEC81FE9B626002E2250 /* Patchworks.xcdatamodeld in Sources */,
 				3F3D928F1FE1B7300013F743 /* BlockView+DoubleCross.swift in Sources */,
 				3F31F85D1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift in Sources */,
@@ -242,6 +249,7 @@
 				3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */,
 				3F3D92911FE1DA3E0013F743 /* BlockView+BasketWeave.swift in Sources */,
 				3FBACECA1FEACDF6002E2250 /* CoreDataStack.swift in Sources */,
+				3F0472F91FFDE23800B3C983 /* Shape+Convenience.swift in Sources */,
 				3F87D1C31FD8950B003AC8F5 /* ShapeView.swift in Sources */,
 				3FBACED41FFD714B002E2250 /* UIColor+ShapeColor.swift in Sources */,
 				3FBACED01FEB086B002E2250 /* BlockCollectionViewCell.swift in Sources */,

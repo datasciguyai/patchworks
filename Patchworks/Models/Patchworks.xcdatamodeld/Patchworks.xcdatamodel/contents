@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Block" representedClassName="Block" syncable="YES" codeGenerationType="class">
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pattern" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="previewImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="shapes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shape" inverseName="block" inverseEntity="Shape" syncable="YES"/>
+    </entity>
+    <entity name="Shape" representedClassName="Shape" syncable="YES" codeGenerationType="class">
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="block" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="shapes" inverseEntity="Block" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Block" positionX="-36" positionY="9" width="128" height="90"/>
+        <element name="Block" positionX="250" positionY="117" width="128" height="118"/>
+        <element name="Shape" positionX="45" positionY="146" width="128" height="88"/>
     </elements>
 </model>
