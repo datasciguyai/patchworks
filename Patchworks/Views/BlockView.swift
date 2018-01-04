@@ -10,24 +10,22 @@ import UIKit
 
 class BlockView: UIView {
 
-    enum block {
-        case basketWeave
-        case churnDash
-        case doubleCross
-        case logCabin
+    enum BlockPattern: String {
+        case basketWeave = "basketWeave"
+        case churnDash = "churnDash"
+        case doubleCross = "doubleCross"
+        case logCabin = "logCabin"
     }
     
     weak var blockVC: BlockViewController?
     
-    let shapeColor = UIColor(red: 0.889, green: 0.000, blue: 1.000, alpha: 1.000)
-    
-    var blockStyle: BlockView.block?
+    var blockPattern: BlockView.BlockPattern?
     
     lazy var shapes: [ShapeView]? = {
-        guard let blockStyle = blockStyle else {
+        guard let blockP = blockPattern else {
             return nil
         }
-        switch blockStyle {
+        switch blockP {
         case .basketWeave:
             return basketWeave
         case .churnDash:
@@ -39,17 +37,9 @@ class BlockView: UIView {
         }
     }()
     
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//    }
-//
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//    }
-    
-    convenience init(blockStyle: BlockView.block) {
+    convenience init(blockPattern: BlockView.BlockPattern) {
         self.init()
-        self.blockStyle = blockStyle
+        self.blockPattern = blockPattern
     }
     
     override func layoutSubviews() {

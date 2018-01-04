@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "blockCell"
 
@@ -24,11 +25,6 @@ class BlockCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     /*
     // MARK: - Navigation
 
@@ -41,19 +37,19 @@ class BlockCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return BlockController.blocks.count
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? BlockCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        cell.blockImageView.image = BlockController.blocks[indexPath.row].previewImage as! UIImage
-        
-        return cell
-    }
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return BlockController.blocks.count
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? BlockCollectionViewCell else {
+//            return UICollectionViewCell()
+//        }
+//
+//        cell.blockImageView.image = BlockController.blocks[indexPath.row].previewImage as! UIImage
+//
+//        return cell
+//    }
 
     // MARK: UICollectionViewDelegate
 

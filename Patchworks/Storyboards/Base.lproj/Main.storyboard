@@ -131,7 +131,7 @@
                     <navigationItem key="navigationItem" title="My Blocks" id="ZFI-27-W6l">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XA1-Aa-Fxr">
                             <connections>
-                                <segue destination="ntW-p8-mcx" kind="show" identifier="toStockBlocks" id="hRP-ip-3jN"/>
+                                <segue destination="ntW-p8-mcx" kind="show" identifier="toPredefinedBlocks" id="hRP-ip-3jN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -208,6 +208,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1kQ-Xj-RVv"/>
+        <segue reference="PFX-fx-Xm9"/>
     </inferredMetricsTieBreakers>
 </document>

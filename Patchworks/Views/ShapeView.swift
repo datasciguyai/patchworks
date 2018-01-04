@@ -16,8 +16,8 @@ class ShapeView: UIView {
     }
     
     var shapePath = UIBezierPath()
-    var strokeColor = UIColor()
-    var fillColor = UIColor()
+    var strokeColor = UIColor.shapeStrokeColor
+    var fillColor = UIColor.shapeFillColor
     var rotation = CGFloat()
     var image: UIImage? {
         didSet {
@@ -27,11 +27,10 @@ class ShapeView: UIView {
     
     weak var delegate: ShapeDelegate?
     
-    convenience init(frame: CGRect, rotation: CGFloat, color: UIColor, shapeType: shape) {
+    convenience init(frame: CGRect, rotation: CGFloat, image: UIImage? = nil, shapeType: shape) {
         self.init(frame: frame)
         self.rotation = rotation
-        self.strokeColor = color
-        self.fillColor = strokeColor.withAlphaComponent(0.3)
+        self.image = image
         setup(shape: shapeType)
     }
     

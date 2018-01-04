@@ -10,9 +10,11 @@ import UIKit
 import CoreData
 
 extension Block {
-    @discardableResult convenience init(blockView: BlockView, previewImage: UIImage, context: NSManagedObjectContext = CoreDataStack.context) {
+    @discardableResult convenience init(context: NSManagedObjectContext = CoreDataStack.context, pattern: String, title: String, previewImage: Data) {
         self.init(context: context)
-        self.blockView = blockView
+//        self.uuid = uuid
+        self.pattern = pattern
+        self.title = title
         self.previewImage = previewImage
     }
 }
