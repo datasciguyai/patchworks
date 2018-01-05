@@ -11,9 +11,9 @@ import UIKit
 class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ShapeDelegate {
     
     var blockView: BlockView?
-    var blockPattern: BlockView.BlockPattern?
     
     let imagePicker = UIImagePickerController()
+    
     var shape = ShapeView()
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
@@ -21,10 +21,14 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         UIGraphicsBeginImageContext((blockView?.bounds.size)!)
         blockView?.drawHierarchy(in: (blockView?.bounds)!, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let i = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
-        BlockController.shared.add(block: Block(pattern: (blockPattern?.rawValue)!, title: "test", previewImage: UIImagePNGRepresentation(image!)!))
+        let b = Block(pattern: (blockView?.blockPattern?.rawValue)!, title: "test", previewImage: UIImagePNGRepresentation(i!)!)
+        for s in (blockView?.shapes)! {
+            let sh = Shape(tag: Int64(s.tag), image: UIImagePNGRepresentation(s.image ?? UIImage()))
+            sh.block = b
+            BlockController.shared.add(block: b)
+        }
     }
     
     func shapeClicked(_ sender: ShapeView) {
@@ -37,8 +41,6 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-        blockView = BlockView(blockPattern: blockPattern!)
-        //        block?.blockStyle = .churnDash
         blockView?.blockVC = self
         blockView?.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(blockView!)
@@ -46,10 +48,9 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let width = NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: UIScreen.main.bounds.maxX - 16)
         blockView?.addConstraints([height, width])
         let x = NSLayoutConstraint(item: blockView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        let y = NSLayoutConstraint(item: blockView, attribute: .topMargin, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1.0, constant: 0.0)
+        let y = NSLayoutConstraint(item: blockView, attribute: .topMargin, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1.0, constant: 20.0)
         view.addConstraints([x, y])
     }
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {

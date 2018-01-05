@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVY-1R-eDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1977" y="-259"/>
+            <point key="canvasLocation" x="1914" y="372"/>
         </scene>
         <!--My Blocks-->
         <scene sceneID="T0r-z9-c94">
@@ -139,54 +139,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQ3-aD-plT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1020" y="-88.605697151424295"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="qgd-xZ-Jew">
-            <objects>
-                <viewController id="yzi-rc-aw2" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tEC-nv-ahh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xXq-ua-mEY">
-                                <rect key="frame" x="8" y="465" width="359" height="194"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="jvj-Rb-Rd0" firstAttribute="trailing" secondItem="xXq-ua-mEY" secondAttribute="trailing" constant="8" id="9Kb-M2-xsd"/>
-                            <constraint firstItem="xXq-ua-mEY" firstAttribute="leading" secondItem="jvj-Rb-Rd0" secondAttribute="leading" constant="8" id="Mqz-Xr-eoJ"/>
-                            <constraint firstItem="jvj-Rb-Rd0" firstAttribute="bottom" secondItem="xXq-ua-mEY" secondAttribute="bottom" constant="8" id="lla-in-zng"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="jvj-Rb-Rd0"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="3T2-a6-Rtf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fMM-vW-OED" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="653.60000000000002" y="832.53373313343332"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="X55-T4-IY6">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9FS-rG-WIw" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YSH-Rt-I5t">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="yzi-rc-aw2" kind="relationship" relationship="rootViewController" id="3DI-am-Szh"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MXy-8i-qv0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-266" y="834"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wvg-lM-yah">

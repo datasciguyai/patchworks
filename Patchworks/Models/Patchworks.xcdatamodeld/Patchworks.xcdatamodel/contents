@@ -5,12 +5,12 @@
         <attribute name="pattern" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="previewImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="shapes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shape" inverseName="block" inverseEntity="Shape" syncable="YES"/>
+        <relationship name="shapes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shape" inverseName="block" inverseEntity="Shape" syncable="YES"/>
     </entity>
     <entity name="Shape" representedClassName="Shape" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="tag" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="block" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Block" inverseName="shapes" inverseEntity="Block" syncable="YES"/>
+        <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="shapes" inverseEntity="Block" syncable="YES"/>
     </entity>
     <elements>
         <element name="Block" positionX="250" positionY="117" width="128" height="118"/>

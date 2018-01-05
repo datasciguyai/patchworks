@@ -20,15 +20,15 @@ class PredefinedBlockViewController: UIViewController {
         guard let blockVC = segue.destination as? BlockViewController else { return }
         switch segue.identifier {
         case "fromBasketWeaveButton"?:
-            blockVC.blockPattern = BlockView.BlockPattern.basketWeave
+            blockVC.blockView = BlockView(blockPattern: .basketWeave)
         case "fromChurnDashButton"?:
-            blockVC.blockPattern = BlockView.BlockPattern.churnDash
+            blockVC.blockView = BlockView(blockPattern: .churnDash)
         case "fromDoubleCrossButton"?:
-            blockVC.blockPattern = BlockView.BlockPattern.doubleCross
+            blockVC.blockView = BlockView(blockPattern: .doubleCross)
         case "fromLogCabinButton"?:
-            blockVC.blockPattern = BlockView.BlockPattern.logCabin
+            blockVC.blockView = BlockView(blockPattern: .logCabin)
         default:
-            blockVC.blockPattern = BlockView.BlockPattern.churnDash
+            blockVC.blockView = BlockView(blockPattern: .basketWeave)
         }
     }
 }

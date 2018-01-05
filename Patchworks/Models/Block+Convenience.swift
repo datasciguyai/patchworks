@@ -12,7 +12,6 @@ import CoreData
 extension Block {
     @discardableResult convenience init(context: NSManagedObjectContext = CoreDataStack.context, pattern: String, title: String, previewImage: Data, notes: String? = nil) {
         self.init(context: context)
-//        self.uuid = uuid
         self.pattern = pattern
         self.title = title
         self.previewImage = previewImage
