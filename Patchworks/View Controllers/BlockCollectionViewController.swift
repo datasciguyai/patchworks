@@ -21,19 +21,28 @@ class BlockCollectionViewController: UICollectionViewController {
         
         // Register cell classes
         //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        // Do any additional setup after loading the view.
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let blockVC = segue.destination as? BlockViewController else { return }
+        
+        if segue.identifier == "fromBlock" {
+            var shapeViews = [ShapeView]()
+            var shapes = BlockController.shared.blocks[(collectionView?.indexPath(for: sender as! BlockCollectionViewCell)?.row)!].shapes!
+            for shape in shapes {
+                if let imageData = shape.image {
+                    shapeViews.append(ShapeView(frame: CGRectFromString(shape.rect!), rotation: CGFloat(shape.rotation), image: UIImage(data: imageData), shapeType: ShapeView.shape(rawValue: shape.type!)!))
+                } else {
+                    shapeViews.append(ShapeView(frame: CGRectFromString(shape.rect!), rotation: CGFloat(shape.rotation), shapeType: ShapeView.shape(rawValue: shape.type!)!))
+                }
+            }
+            blockVC.blockView = BlockView(shapesViews: shapeViews)
+            blockVC.block = BlockController.shared.blocks[(collectionView?.indexPath(for: sender as! BlockCollectionViewCell)?.row)!]
+            blockVC.shapes = shapes
+        }
+    }
     
     // MARK: UICollectionViewDataSource
     

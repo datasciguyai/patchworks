@@ -12,7 +12,8 @@ extension BlockView {
         return [
             
             // Rectangles
-            ShapeView(frame: CGRect(x: bounds.minX, y: bounds.minY, width: bounds.midX, height: bounds.midY / 3), rotation: CGFloat(0.0), shapeType: .rectangle), ShapeView(frame: CGRect(x: bounds.minX, y: bounds.midY / 3, width: bounds.midX, height: bounds.midY / 3), rotation: CGFloat(0.0), shapeType: .rectangle),
+            ShapeView(frame: CGRect(x: bounds.minX, y: bounds.minY, width: bounds.midX, height: bounds.midY / 3), rotation: CGFloat(0.0), shapeType: .rectangle),
+            ShapeView(frame: CGRect(x: bounds.minX, y: bounds.midY / 3, width: bounds.midX, height: bounds.midY / 3), rotation: CGFloat(0.0), shapeType: .rectangle),
             ShapeView(frame: CGRect(x: bounds.minX, y: bounds.midY / 1.5, width: bounds.midX, height: bounds.midY / 3), rotation: CGFloat(0.0), shapeType: .rectangle),
             ShapeView(frame: CGRect(x: bounds.minX, y: bounds.midY, width: bounds.midX / 3, height: bounds.midY), rotation: CGFloat(0.0), shapeType: .rectangle),
             ShapeView(frame: CGRect(x: bounds.midX / 3, y: bounds.midY, width: bounds.midX / 3, height: bounds.midY), rotation: CGFloat(0.0), shapeType: .rectangle),

@@ -12,11 +12,16 @@ class ShapeController {
     
     static let shared = ShapeController()
     
-    var shapes = [Shape]()
+//    var shapes = [Shape]()
     
     // MARK: - C.R.U.D.
     
     // MARK: - Create
+    
+    func add(shape: Shape, block: Block) {
+        block.addToRawShapes(shape)
+        saveToPersistentStore()
+    }
     
     // MARK: - Retrieve
     
@@ -28,5 +33,19 @@ class ShapeController {
             print("error \(error)")
         }
         return []
+    }
+    
+    func update(shape: Shape) {
+        
+    }
+    
+    // MARK: - Save
+    
+    func saveToPersistentStore() {
+        do {
+            try CoreDataStack.context.save()
+        } catch let error {
+            print("There was a problem saving to the peristent store: \(error)")
+        }
     }
 }

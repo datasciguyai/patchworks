@@ -9,12 +9,6 @@
 import UIKit
 
 class PredefinedBlockViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let blockVC = segue.destination as? BlockViewController else { return }

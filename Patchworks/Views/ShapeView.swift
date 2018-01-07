@@ -10,12 +10,14 @@ import UIKit
 
 class ShapeView: UIView {
     
-    enum shape {
-        case rectangle
-        case triangle
+    enum shape: String {
+        case rectangle = "rectangle"
+        case triangle = "triangle"
     }
     
     var shapePath = UIBezierPath()
+    var originalFrame = CGRect()
+    var shapeType = shape.rectangle
     var strokeColor = UIColor.shapeStrokeColor
     var fillColor = UIColor.shapeFillColor
     var rotation = CGFloat()
@@ -29,8 +31,10 @@ class ShapeView: UIView {
     
     convenience init(frame: CGRect, rotation: CGFloat, image: UIImage? = nil, shapeType: shape) {
         self.init(frame: frame)
+        self.originalFrame = frame
         self.rotation = rotation
         self.image = image
+        self.shapeType = shapeType
         setup(shape: shapeType)
     }
     

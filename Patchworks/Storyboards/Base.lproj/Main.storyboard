@@ -120,6 +120,7 @@
                                 </view>
                                 <connections>
                                     <outlet property="blockImageView" destination="fWE-15-gIH" id="6xi-f5-v91"/>
+                                    <segue destination="mI3-6I-0KT" kind="show" identifier="fromBlock" id="UuH-J3-U1s"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -160,6 +161,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PFX-fx-Xm9"/>
+        <segue reference="UuH-J3-U1s"/>
     </inferredMetricsTieBreakers>
 </document>

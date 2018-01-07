@@ -21,7 +21,7 @@ class BlockView: UIView {
     
     var blockPattern: BlockView.BlockPattern?
     
-    lazy var shapes: [ShapeView]? = {
+    lazy var shapeViews: [ShapeView]? = {
         guard let blockPattern = blockPattern else {
             return nil
         }
@@ -42,14 +42,19 @@ class BlockView: UIView {
         self.blockPattern = blockPattern
     }
     
+    convenience init(shapesViews: [ShapeView]) {
+        self.init()
+        self.shapeViews = shapesViews
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        guard let shapes = shapes else {
+        guard let shapeViews = shapeViews else {
             return
         }
-        for shape in shapes {
-            addSubview(shape)
-            shape.delegate = blockVC
+        for shapeView in shapeViews {
+            addSubview(shapeView)
+            shapeView.delegate = blockVC
         }
     }
 }
