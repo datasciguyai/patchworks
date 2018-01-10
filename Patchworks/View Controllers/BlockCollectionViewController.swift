@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-private let reuseIdentifier = "blockCell"
-
 class BlockCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
@@ -21,6 +19,14 @@ class BlockCollectionViewController: UICollectionViewController {
         
         // Register cell classes
         //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    }
+    
+    @IBAction func cancelUnwindSegue(_ sender: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func saveUnwindSegue(_ sender: UIStoryboardSegue) {
+        
     }
     
     // MARK: - Navigation
@@ -44,14 +50,14 @@ class BlockCollectionViewController: UICollectionViewController {
         }
     }
     
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return BlockController.shared.blocks.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? BlockCollectionViewCell, let previewImageData = BlockController.shared.blocks[indexPath.row].previewImage else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "blockCell", for: indexPath) as? BlockCollectionViewCell, let previewImageData = BlockController.shared.blocks[indexPath.row].previewImage else {
             return UICollectionViewCell()
         }
         
@@ -60,7 +66,12 @@ class BlockCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    // MARK: UICollectionViewDelegate
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView?.reloadData()
+    }
+    
+    // MARK: - UICollectionViewDelegate
     
     /*
      // Uncomment this method to specify if the specified item should be highlighted during tracking

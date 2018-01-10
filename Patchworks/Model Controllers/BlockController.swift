@@ -23,8 +23,9 @@ class BlockController {
     
     // MARK: - Create
     
-    func add(block: Block) {
+    func add(block: Block, shapes: NSOrderedSet) {
         blocks.append(block)
+        block.addToRawShapes(shapes)
         saveToPersistentStore()
         blocks = fetchBlocks()
     }
@@ -43,9 +44,9 @@ class BlockController {
     
     // MARK: - Update
     
-    func update(block: Block, previewImage: UIImage) {
-        guard let blockIndex = blocks.index(of: block) else { return }
-        blocks[blockIndex].previewImage = UIImagePNGRepresentation(previewImage)
+    func update(block: Block) {
+//        guard let blockIndex = blocks.index(of: block) else { return }
+//        blocks[blockIndex].previewImage = UIImagePNGRepresentation(previewImage)
         saveToPersistentStore()
         blocks = fetchBlocks()
     }
@@ -68,5 +69,4 @@ class BlockController {
             print("There was a problem saving to the peristent store: \(error)")
         }
     }
-    
 }

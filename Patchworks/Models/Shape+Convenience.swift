@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 extension Shape {
-    @discardableResult convenience init(context: NSManagedObjectContext = CoreDataStack.context, rect: String, rotation: Float, tag: Int64, image: Data? = nil, type: String) {
+    @discardableResult convenience init(rect: String, rotation: Float, tag: Int64, image: Data?, type: String, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.rect = rect
         self.rotation = rotation

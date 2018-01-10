@@ -30,14 +30,20 @@
                         <viewLayoutGuide key="safeArea" id="AQg-Ki-Umw"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="aqr-hd-aY2">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="NZs-yU-fkK">
+                            <connections>
+                                <segue destination="iaP-HE-0PN" kind="unwind" identifier="fromBlockVCCancel" unwindAction="cancelUnwindSegue:" id="ms1-g1-Tec"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="4Sb-6d-SGr">
                             <connections>
-                                <action selector="saveButtonTapped:" destination="mI3-6I-0KT" id="dRZ-Wn-Z3H"/>
+                                <segue destination="iaP-HE-0PN" kind="unwind" identifier="fromBlockVCSave" unwindAction="saveUnwindSegue:" id="OQ9-2v-Wim"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iA-G8-BTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="iaP-HE-0PN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2869.5999999999999" y="-191.1544227886057"/>
         </scene>
@@ -161,6 +167,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UuH-J3-U1s"/>
+        <segue reference="PFX-fx-Xm9"/>
     </inferredMetricsTieBreakers>
 </document>

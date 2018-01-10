@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 extension Block {
-    @discardableResult convenience init(context: NSManagedObjectContext = CoreDataStack.context, title: String, previewImage: Data, notes: String? = nil) {
+    @discardableResult convenience init(title: String, previewImage: Data, notes: String? = nil, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.title = title
         self.previewImage = previewImage
@@ -18,6 +18,6 @@ extension Block {
     }
     
     var shapes: [Shape]? {
-        return self.rawShapes?.array as? [Shape]
+        return rawShapes?.array as? [Shape]
     }
 }

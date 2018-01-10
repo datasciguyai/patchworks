@@ -16,33 +16,11 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     var shapes: [Shape]?
     
-    var new: Bool = false
+    var newBlock: Bool = true
     
     let imagePicker = UIImagePickerController()
     
     var shapeView = ShapeView()
-    
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        // Make image smaller
-        guard let blockView = blockView else { return }
-        UIGraphicsBeginImageContext(blockView.bounds.size)
-        blockView.drawHierarchy(in: blockView.bounds, afterScreenUpdates: true)
-        let previewImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        if let previewImage = previewImage {
-            if new {
-                let block = Block(title: "test", previewImage: UIImagePNGRepresentation(previewImage)!)
-                BlockController.shared.add(block: block)
-                for shapeView in blockView.shapeViews! {
-                    let shape = Shape(rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), tag: Int64(shapeView.tag), image: UIImagePNGRepresentation(shapeView.image ?? UIImage()), type: shapeView.shapeType.rawValue)
-                    ShapeController.shared.add(shape: shape, block: block)
-                }
-            } else {
-                
-            }
-        }
-    }
     
     func shapeClicked(_ sender: ShapeView) {
         shapeView = sender
@@ -69,14 +47,43 @@ class BlockViewController: UIViewController, UIImagePickerControllerDelegate, UI
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             shapeView.image = pickedImage
-            let i = blockView?.shapeViews?.index(of: shapeView)
-            shapes![i!].image = UIImagePNGRepresentation(shapeView.image!)
-            ShapeController.shared.saveToPersistentStore()
         }
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        
+        
+        
+        if let blockPreviewImageData = blockPreviewImageData {
+            if newBlock {
+                let block = Block(title: "test", previewImage: blockPreviewImageData)
+                var shapes = [Shape]()
+                for shapeView in (blockView?.shapeViews!)! {
+                    let shape = Shape(rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), tag: Int64(shapeView.tag), image: UIImagePNGRepresentation((shapeView.image ?? nil)!), type: shapeView.shapeType.rawValue)
+                    shapes.append(shape)
+                }
+                let s = NSOrderedSet(array: shapes)
+                BlockController.shared.add(block: block, shapes: s)
+                navigationController?.popViewController(animated: true)
+            } else {
+                
+            }
+        }
+        
+    }
+    
+    private var blockPreviewImageData: Data? {
+        guard let blockView = blockView else { return nil }
+        UIGraphicsBeginImageContext(blockView.bounds.size)
+        blockView.drawHierarchy(in: blockView.bounds, afterScreenUpdates: true)
+        let imageFromCurrentImageContext = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let blockPreviewImage = imageFromCurrentImageContext else { return nil }
+        return UIImagePNGRepresentation(blockPreviewImage)
     }
 }
