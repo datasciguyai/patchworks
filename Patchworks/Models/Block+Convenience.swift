@@ -6,18 +6,13 @@
 //  Copyright © 2017 Jeremy Reynolds. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
 extension Block {
-    @discardableResult convenience init(title: String, previewImage: Data, notes: String? = nil, context: NSManagedObjectContext = CoreDataStack.context) {
+    @discardableResult convenience init(title: String, notes: String? = nil, previewImageFileName: String, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.title = title
-        self.previewImage = previewImage
         self.notes = notes
-    }
-    
-    var shapes: [Shape]? {
-        return rawShapes?.array as? [Shape]
+        self.previewImageFileName = previewImageFileName
     }
 }

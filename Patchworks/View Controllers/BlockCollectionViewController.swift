@@ -9,66 +9,103 @@
 import UIKit
 import CoreData
 
-class BlockCollectionViewController: UICollectionViewController {
+class BlockCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
+    
+    var fetchedResultsController: NSFetchedResultsController<Block>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Register cell classes
-        //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        configureFetchedResultsController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView?.reloadData()
+    }
+    
+    func configureFetchedResultsController() {
+        if fetchedResultsController == nil {
+            let fetchRequest: NSFetchRequest<Block> = Block.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController<Block>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController.delegate = self
+        }
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            NSLog("Error starting fetched results controller: \(error)")
+        }
     }
     
     @IBAction func cancelUnwindSegue(_ sender: UIStoryboardSegue) {
-        
+//        CoreDataStack.context.rollback()
     }
     
     @IBAction func saveUnwindSegue(_ sender: UIStoryboardSegue) {
-        
+//        BlockController.shared.saveToPersistentStore()
     }
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let blockVC = segue.destination as? BlockViewController else { return }
-        
-        if segue.identifier == "fromBlock" {
-            var shapeViews = [ShapeView]()
-            var shapes = BlockController.shared.blocks[(collectionView?.indexPath(for: sender as! BlockCollectionViewCell)?.row)!].shapes!
-            for shape in shapes {
-                if let imageData = shape.image {
-                    shapeViews.append(ShapeView(frame: CGRectFromString(shape.rect!), rotation: CGFloat(shape.rotation), image: UIImage(data: imageData), shapeType: ShapeView.shape(rawValue: shape.type!)!))
-                } else {
-                    shapeViews.append(ShapeView(frame: CGRectFromString(shape.rect!), rotation: CGFloat(shape.rotation), shapeType: ShapeView.shape(rawValue: shape.type!)!))
-                }
-            }
-            blockVC.blockView = BlockView(shapesViews: shapeViews)
-            blockVC.block = BlockController.shared.blocks[(collectionView?.indexPath(for: sender as! BlockCollectionViewCell)?.row)!]
-            blockVC.shapes = shapes
+        guard let blockViewController = segue.destination as? BlockViewController, let blocks = fetchedResultsController.fetchedObjects, let indexPath = collectionView?.indexPathsForSelectedItems?.first else { return }
+        if segue.identifier == "toBlockViewController" {
+            blockViewController.block = blocks[indexPath.row]
         }
     }
     
     // MARK: - UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return BlockController.shared.blocks.count
+        guard let blocks = fetchedResultsController.fetchedObjects else { return 0 }
+        return blocks.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "blockCell", for: indexPath) as? BlockCollectionViewCell, let previewImageData = BlockController.shared.blocks[indexPath.row].previewImage else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "blockCollectionViewCell", for: indexPath) as? BlockCollectionViewCell else {
             return UICollectionViewCell()
         }
         
-        cell.blockImageView.image = UIImage(data: previewImageData)
+        guard let blocks = fetchedResultsController.fetchedObjects, let previewImageFileName = blocks[indexPath.row].previewImageFileName, let blockImagePath = BlockController.shared.blockThumbnailsDirectoryURL?.appendingPathComponent(previewImageFileName).path else { return cell }
+        
+        cell.blockImageView.image = UIImage(contentsOfFile: blockImagePath)
         
         return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView?.reloadData()
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            collectionView?.insertItems(at: [newIndexPath])
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            collectionView?.deleteItems(at: [indexPath])
+        case .move:
+            collectionView?.reloadData()
+        case .update:
+            guard let indexPath = indexPath else { return }
+            collectionView?.reloadItems(at: [indexPath])
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .delete:
+            collectionView?.deleteSections(IndexSet(integer: sectionIndex))
+        case .insert:
+            collectionView?.insertSections(IndexSet(integer: sectionIndex))
+        default:
+            break
+        }
     }
     
     // MARK: - UICollectionViewDelegate
@@ -101,5 +138,4 @@ class BlockCollectionViewController: UICollectionViewController {
      
      }
      */
-    
 }

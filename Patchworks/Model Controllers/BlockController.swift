@@ -6,58 +6,49 @@
 //  Copyright © 2017 Jeremy Reynolds. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
 class BlockController {
     
     static let shared = BlockController()
     
-    var blocks = [Block]()
-    
-    init() {
-        blocks = fetchBlocks()
-    }
-    
-    // MARK: - C.R.U.D.
-    
-    // MARK: - Create
-    
-    func add(block: Block, shapes: NSOrderedSet) {
-        blocks.append(block)
-        block.addToRawShapes(shapes)
-        saveToPersistentStore()
-        blocks = fetchBlocks()
-    }
+    var block = Block()
     
     // MARK: - Retrieve
     
-    func fetchBlocks() -> [Block] {
+    var blocks: [Block] {
         let request: NSFetchRequest<Block> = Block.fetchRequest()
         do {
             return try CoreDataStack.context.fetch(request)
         } catch let error {
-            print("error \(error)")
+            print("There was a problem fetching objects: \(error)")
         }
         return []
     }
     
+    // MARK: - Create
+    
+    func createBlockWith(title: String, notes: String? = nil, previewImageFileName: String) {
+        block = Block(title: title, notes: nil, previewImageFileName: previewImageFileName)
+    }
+    
     // MARK: - Update
     
-    func update(block: Block) {
-//        guard let blockIndex = blocks.index(of: block) else { return }
-//        blocks[blockIndex].previewImage = UIImagePNGRepresentation(previewImage)
-        saveToPersistentStore()
-        blocks = fetchBlocks()
-    }
+    //    func update(block: Block) {
+    //        Future use
+    //    }
     
     // MARK: - Delete
     
-    func remove(block: Block) {
-        guard let blockIndex = blocks.index(of: block) else { return }
-        blocks.remove(at: blockIndex)
+    func delete(block: Block) {
+        guard let managedObjectContext = block.managedObjectContext, let shapesURL = ShapeController.shared.shapeImagesDirectoryURL, let shapes = block.rawShapes?.array as? [Shape] else { return }
+        for shape in shapes {
+            if let imageFileName = shape.imageFileName {
+            try? FileManager.default.removeItem(at: shapesURL.appendingPathComponent(imageFileName))
+            }
+        }
+        managedObjectContext.delete(block)
         saveToPersistentStore()
-        blocks = fetchBlocks()
     }
     
     // MARK: - Save
@@ -68,5 +59,22 @@ class BlockController {
         } catch let error {
             print("There was a problem saving to the peristent store: \(error)")
         }
+    }
+    
+    var blockThumbnailsDirectoryURL: URL? {
+        guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        
+        let blockThumbnailsDirectoryURL = documentsDirectoryURL.appendingPathComponent("BlockThumbnails", isDirectory: true)
+        
+        var objcBool: ObjCBool = true
+        let directoryExists = FileManager.default.fileExists(atPath: blockThumbnailsDirectoryURL.path, isDirectory: &objcBool)
+        if !directoryExists {
+            do {
+                try FileManager.default.createDirectory(atPath: blockThumbnailsDirectoryURL.path, withIntermediateDirectories: false, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        return blockThumbnailsDirectoryURL
     }
 }

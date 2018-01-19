@@ -10,14 +10,14 @@ import UIKit
 
 class ShapeView: UIView {
     
-    enum shape: String {
+    enum ShapeType: String {
         case rectangle = "rectangle"
         case triangle = "triangle"
     }
     
     var shapePath = UIBezierPath()
     var originalFrame = CGRect()
-    var shapeType = shape.rectangle
+    var shapeType = ShapeType.rectangle
     var strokeColor = UIColor.shapeStrokeColor
     var fillColor = UIColor.shapeFillColor
     var rotation = CGFloat()
@@ -29,7 +29,7 @@ class ShapeView: UIView {
     
     weak var delegate: ShapeDelegate?
     
-    convenience init(frame: CGRect, rotation: CGFloat, image: UIImage? = nil, shapeType: shape) {
+    convenience init(frame: CGRect, rotation: CGFloat, image: UIImage? = nil, shapeType: ShapeType) {
         self.init(frame: frame)
         self.originalFrame = frame
         self.rotation = rotation
@@ -39,10 +39,10 @@ class ShapeView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        let _ = drawShape()
+        drawShape()
     }
     
-    func drawShape() -> UIBezierPath {
+    @discardableResult func drawShape() -> UIBezierPath {
         if let image = image?.cgImage {
             if let context = UIGraphicsGetCurrentContext()  {
                 context.saveGState()
@@ -64,7 +64,13 @@ class ShapeView: UIView {
         return shapePath
     }
     
-    func setup(shape: shape = .rectangle) {
+    func removeImage() {
+        if image != nil {
+            image = nil
+        }
+    }
+    
+    func setup(shape: ShapeType = .rectangle) {
         backgroundColor = UIColor.clear
         if shape == .triangle {
             shapePath = triangle
@@ -80,7 +86,6 @@ class ShapeView: UIView {
             return nil
         }
         delegate?.shapeClicked(self)
-        setNeedsDisplay()
         return self
     }
 }

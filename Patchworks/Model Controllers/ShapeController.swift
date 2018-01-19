@@ -12,40 +12,44 @@ class ShapeController {
     
     static let shared = ShapeController()
     
-//    var shapes = [Shape]()
+    var shapes = [Shape]()
     
     // MARK: - C.R.U.D.
     
     // MARK: - Create
     
-    func add(shape: Shape, block: Block) {
-        block.addToRawShapes(shape)
-        saveToPersistentStore()
+    func createShapeWith(rect: String, rotation: Float, imageFileName: String? = nil, type: String, block: Block) {
+        Shape(rect: rect, rotation: rotation, imageFileName: imageFileName, type: type, block: block)
     }
     
     // MARK: - Retrieve
     
-    func fetchShapes() -> [Shape] {
-        let request: NSFetchRequest<Shape> = Shape.fetchRequest()
-        do {
-            return try CoreDataStack.context.fetch(request)
-        } catch let error {
-            print("error \(error)")
-        }
-        return []
-    }
+    // MARK: - Update
     
-    func update(shape: Shape) {
+    func update() {
         
     }
     
-    // MARK: - Save
+    // MARK: - Delete
     
-    func saveToPersistentStore() {
-        do {
-            try CoreDataStack.context.save()
-        } catch let error {
-            print("There was a problem saving to the peristent store: \(error)")
+//    func deleteShape() {
+//        Future use
+//    }
+    
+    var shapeImagesDirectoryURL: URL? {
+        guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        
+        let shapeImagesDirectoryURL = documentsDirectoryURL.appendingPathComponent("ShapeImages", isDirectory: true)
+        
+        var objcBool: ObjCBool = true
+        let directoryExists = FileManager.default.fileExists(atPath: shapeImagesDirectoryURL.path, isDirectory: &objcBool)
+        if !directoryExists {
+            do {
+                try FileManager.default.createDirectory(atPath: shapeImagesDirectoryURL.path, withIntermediateDirectories: false, attributes: nil)
+            } catch {
+                print(error)
+            }
         }
+        return shapeImagesDirectoryURL
     }
 }

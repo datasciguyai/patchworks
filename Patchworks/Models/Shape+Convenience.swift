@@ -6,16 +6,15 @@
 //  Copyright © 2018 Jeremy Reynolds. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
 extension Shape {
-    @discardableResult convenience init(rect: String, rotation: Float, tag: Int64, image: Data?, type: String, context: NSManagedObjectContext = CoreDataStack.context) {
+    @discardableResult convenience init(rect: String, rotation: Float, imageFileName: String? = nil, type: String, block: Block, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.rect = rect
         self.rotation = rotation
-        self.tag = tag
-        self.image = image
+        self.imageFileName = imageFileName
         self.type = type
+        self.block = block
     }
 }
