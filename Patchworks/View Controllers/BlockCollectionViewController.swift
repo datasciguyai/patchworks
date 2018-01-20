@@ -18,10 +18,6 @@ class BlockCollectionViewController: UICollectionViewController, NSFetchedResult
         configureFetchedResultsController()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        collectionView?.reloadData()
-    }
-    
     func configureFetchedResultsController() {
         if fetchedResultsController == nil {
             let fetchRequest: NSFetchRequest<Block> = Block.fetchRequest()
@@ -36,12 +32,10 @@ class BlockCollectionViewController: UICollectionViewController, NSFetchedResult
         }
     }
     
-    @IBAction func cancelUnwindSegue(_ sender: UIStoryboardSegue) {
-//        CoreDataStack.context.rollback()
-    }
+    @IBAction func cancelUnwindSegue(_ sender: UIStoryboardSegue) {}
     
     @IBAction func saveUnwindSegue(_ sender: UIStoryboardSegue) {
-//        BlockController.shared.saveToPersistentStore()
+        BlockController.shared.saveToPersistentStore()
     }
     
     // MARK: - Navigation

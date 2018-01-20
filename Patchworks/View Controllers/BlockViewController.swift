@@ -13,6 +13,8 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
     
     var blockView: BlockView?
     
+    @IBOutlet weak var notesTextView: UITextView!
+    
     var blockPreviewImagesURL = BlockController.shared.blockThumbnailsDirectoryURL
     var fabricLibraryDirectoryURL = ShapeController.shared.shapeImagesDirectoryURL
     
@@ -67,11 +69,11 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
             view.addConstraints([x, y])
             
         } else {
-            
             var shapeViews = [ShapeView]()
             guard let shapes = fetchedResultsController.fetchedObjects else { return }
             for shape in shapes {
                 guard let frame = shape.rect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return }
+                
                 if let imageFileName = shape.imageFileName{
                     
                     guard let shapeImageURL = ShapeController.shared.shapeImagesDirectoryURL else { continue }
@@ -80,7 +82,7 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
                     
                     shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
                 } else {
-                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), image: nil, shapeType: shapeViewShape))
+                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
                 }
             }
             
@@ -116,16 +118,22 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
             })
         }
         
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            alertController.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
-                imagePicker.sourceType = .camera
-                self.present(imagePicker, animated: true)
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            alertController.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
+//                imagePicker.sourceType = .camera
+//                self.present(imagePicker, animated: true)
+//            })
+//        }
+        
+        if shapeView.image != nil {
+            alertController.addAction(UIAlertAction(title: "Delete Image", style: .destructive) { _ in
+                if self.updatedShapeViews == nil {
+                    self.updatedShapeViews = [ShapeView]()
+                }
+                self.updatedShapeViews?.append(self.shapeView)
+                self.shapeView.removeImage()
             })
         }
-        
-        alertController.addAction(UIAlertAction(title: "Delete Image", style: .destructive) { _ in
-            self.shapeView.removeImage()
-        })
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -150,57 +158,39 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
         if unwindSegue.identifier == "fromBlockVCSave" {
             
             guard let blockView = blockView, let shapeViews = blockView.shapeViews else { return }
-            if block != nil {
+            
+            if let block = block {
+                guard let blockThumbnailData = blockThumbnailData, let shapes = fetchedResultsController.fetchedObjects, let updatedShapeViews = updatedShapeViews else { return }
                 
+                BlockController.shared.update(block: block, blockThumbnailData: blockThumbnailData, title: "test", notes: nil)
                 
-                
-                
-                
-                
-                
-                let shapes = fetchedResultsController.fetchedObjects
-                guard let updatedShapeViews = updatedShapeViews,
-                    
-                    let shapeImagesURL = ShapeController.shared.shapeImagesDirectoryURL,
-                    let index = shapeViews.index(of: shapeView),
-                    let fileName = shapes![index].imageFileName,
-                    let blockThumbnailData = blockThumbnailData,
-                    let blockThumbnailFileName = block?.previewImageFileName,
-                    let blockThumbnailURL =
-                    blockPreviewImagesURL?.appendingPathComponent(blockThumbnailFileName) else {
-                        return
-                }
-                try? blockThumbnailData.write(to: blockThumbnailURL)
                 for shapeView in updatedShapeViews {
+                    var imageData: Data? = nil
                     if let image = shapeView.image {
-                        let imageData = UIImageJPEGRepresentation(image, 1.0)
-                        try? imageData?.write(to: shapeImagesURL.appendingPathComponent(fileName))
+                        imageData = UIImageJPEGRepresentation(image, 1.0)
                     }
+                    
+                    guard let index = shapeViews.index(of: shapeView) else { continue }
+                    
+                    ShapeController.shared.update(shape: shapes[index], imageData: imageData)
+
                 }
+                self.updatedShapeViews?.removeAll()
             } else {
-                let blockThumbnailFileName = "\(UUID().uuidString).jpeg"
+                guard let blockThumbnailData = blockThumbnailData else { return }
                 
-                guard let blockThumbnailData = self.blockThumbnailData, let blockThumbnailURL =
-                    blockPreviewImagesURL?.appendingPathComponent(blockThumbnailFileName) else { return }
+                BlockController.shared.createBlockWith(blockThumbnailData: blockThumbnailData, title: "test", notes: nil)
                 
-                try? blockThumbnailData.write(to: blockThumbnailURL)
-                
-                BlockController.shared.createBlockWith(title: "test", notes: nil, previewImageFileName: blockThumbnailFileName)
+                guard let block = BlockController.shared.block else { return }
                 
                 for shapeView in shapeViews {
-                    if let image = shapeView.image  {
-                        guard let imageData = UIImageJPEGRepresentation(image, 1.0), let shapeImageURL = ShapeController.shared.shapeImagesDirectoryURL else { continue }
-                        
-                        let shapeImageFileName = "\(UUID().uuidString).jpeg"
-                        
-                        try? imageData.write(to: shapeImageURL.appendingPathComponent(shapeImageFileName))
-                        
-                        ShapeController.shared.createShapeWith(rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), imageFileName: shapeImageFileName, type: shapeView.shapeType.rawValue, block: BlockController.shared.block)
+                    if let image = shapeView.image {
+                        guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { continue }
+                        ShapeController.shared.createShapeWith(shapeImageData: imageData,rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
                     } else {
-                        ShapeController.shared.createShapeWith(rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), imageFileName: nil, type: shapeView.shapeType.rawValue, block: BlockController.shared.block)
+                        ShapeController.shared.createShapeWith(rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
                     }
                 }
-                BlockController.shared.saveToPersistentStore()
             }
         }
     }

@@ -12,7 +12,7 @@ class BlockController {
     
     static let shared = BlockController()
     
-    var block = Block()
+    var block: Block?
     
     // MARK: - Retrieve
     
@@ -28,15 +28,28 @@ class BlockController {
     
     // MARK: - Create
     
-    func createBlockWith(title: String, notes: String? = nil, previewImageFileName: String) {
+    func createBlockWith(blockThumbnailData: Data, title: String, notes: String? = nil) {
+        
+        guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL else { return }
+        
+        let previewImageFileName: String = "\(UUID().uuidString).jpeg"
+        
+        try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(previewImageFileName))
+        
         block = Block(title: title, notes: nil, previewImageFileName: previewImageFileName)
     }
     
     // MARK: - Update
     
-    //    func update(block: Block) {
-    //        Future use
-    //    }
+    func update(block: Block, blockThumbnailData: Data, title: String, notes: String? = nil) {
+            guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL, let previewImageFileName = block.previewImageFileName else { return }
+        
+        try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(previewImageFileName))
+        
+        block.title = title
+        block.notes = notes
+        
+        }
     
     // MARK: - Delete
     

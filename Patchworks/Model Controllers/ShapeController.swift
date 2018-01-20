@@ -12,29 +12,56 @@ class ShapeController {
     
     static let shared = ShapeController()
     
-    var shapes = [Shape]()
-    
     // MARK: - C.R.U.D.
     
     // MARK: - Create
     
-    func createShapeWith(rect: String, rotation: Float, imageFileName: String? = nil, type: String, block: Block) {
+    func createShapeWith(shapeImageData: Data? = nil, rect: String, rotation: Float, type: String, block: Block) {
+        
+        guard let shapeImagesDirectoryURL = shapeImagesDirectoryURL else { return }
+        
+        let imageFileName = "\(UUID().uuidString).jpeg"
+        
+        try? shapeImageData?.write(to: shapeImagesDirectoryURL.appendingPathComponent(imageFileName))
+        
         Shape(rect: rect, rotation: rotation, imageFileName: imageFileName, type: type, block: block)
+        
     }
     
     // MARK: - Retrieve
     
     // MARK: - Update
     
-    func update() {
+    func update(shape: Shape, imageData: Data?) {
+        guard let imageData = imageData else {
+            if let fileName = shape.imageFileName {
+                deleteShapeImage(fileName: fileName)
+                shape.imageFileName = nil
+            }
+            return
+        }
         
+        guard let shapeImagesDirectoryURL = shapeImagesDirectoryURL else { return }
+        
+        if shape.imageFileName == nil {
+            shape.imageFileName = "\(UUID().uuidString).jpeg"
+        }
+        
+        guard let fileName = shape.imageFileName else { return }
+        
+            try? imageData.write(to: shapeImagesDirectoryURL.appendingPathComponent(fileName))
+    }
+    
+    func deleteShapeImage(fileName: String) {
+        guard let shapeImagesDirectoryURL = shapeImagesDirectoryURL else { return }
+        try? FileManager.default.removeItem(at: shapeImagesDirectoryURL.appendingPathComponent(fileName))
     }
     
     // MARK: - Delete
     
-//    func deleteShape() {
-//        Future use
-//    }
+    //    func deleteShape() {
+    //        Future use
+    //    }
     
     var shapeImagesDirectoryURL: URL? {
         guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
