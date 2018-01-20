@@ -60,14 +60,23 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
         if let blockView = blockView {
             blockView.blockVC = self
             blockView.translatesAutoresizingMaskIntoConstraints = false
+            notesTextView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(blockView)
-            let height = NSLayoutConstraint(item: blockView, attribute: .height, relatedBy: .equal, toItem: blockView, attribute: .width, multiplier: 1.0, constant: 0.0)
-            let width = NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: UIScreen.main.bounds.maxX - 16)
-            blockView.addConstraints([height, width])
-            let x = NSLayoutConstraint(item: blockView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-            let y = NSLayoutConstraint(item: blockView, attribute: .topMargin, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1.0, constant: 20.0)
-            view.addConstraints([x, y])
+            let blockViewHeight = NSLayoutConstraint(item: blockView, attribute: .height, relatedBy: .equal, toItem: blockView, attribute: .width, multiplier: 1.0, constant: 0.0)
+            let blockViewWidth = NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: UIScreen.main.bounds.maxX - 16)
+            blockView.addConstraints([blockViewHeight, blockViewWidth])
             
+            let notesTextViewTop = NSLayoutConstraint(item: notesTextView, attribute: .top, relatedBy: .equal, toItem: blockView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            let notesTextViewBottom = NSLayoutConstraint(item: notesTextView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            let notesTextViewLeading = NSLayoutConstraint(item: notesTextView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0)
+            let notesTextViewTrailing = NSLayoutConstraint(item: notesTextView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+            
+            
+            
+            let blockViewX = NSLayoutConstraint(item: blockView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+            let blockViewY = NSLayoutConstraint(item: blockView, attribute: .topMargin, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1.0, constant: 20.0)
+            let notesTextViewX = NSLayoutConstraint(item: notesTextView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+            view.addConstraints([notesTextViewTop, notesTextViewBottom, notesTextViewLeading, notesTextViewTrailing, blockViewX, blockViewY, notesTextViewX])
         } else {
             var shapeViews = [ShapeView]()
             guard let shapes = fetchedResultsController.fetchedObjects else { return }
@@ -91,12 +100,12 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
             blockView.blockVC = self
             blockView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(blockView)
-            let height = NSLayoutConstraint(item: blockView, attribute: .height, relatedBy: .equal, toItem: blockView, attribute: .width, multiplier: 1.0, constant: 0.0)
-            let width = NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: UIScreen.main.bounds.maxX - 16)
-            blockView.addConstraints([height, width])
-            let x = NSLayoutConstraint(item: blockView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-            let y = NSLayoutConstraint(item: blockView, attribute: .topMargin, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1.0, constant: 20.0)
-            view.addConstraints([x, y])
+            let blockViewHeight = NSLayoutConstraint(item: blockView, attribute: .height, relatedBy: .equal, toItem: blockView, attribute: .width, multiplier: 1.0, constant: 0.0)
+            let blockViewWidth = NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: UIScreen.main.bounds.maxX - 16)
+            blockView.addConstraints([blockViewHeight, blockViewWidth])
+            let blockViewX = NSLayoutConstraint(item: blockView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+            let blockViewY = NSLayoutConstraint(item: blockView, attribute: .topMargin, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1.0, constant: 20.0)
+            view.addConstraints([blockViewX, blockViewY])
         }
     }
     
