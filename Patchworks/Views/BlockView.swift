@@ -10,11 +10,11 @@ import UIKit
 
 class BlockView: UIView {
 
-    enum BlockPattern: String {
-        case basketWeave = "basketWeave"
-        case churnDash = "churnDash"
-        case doubleCross = "doubleCross"
-        case logCabin = "logCabin"
+    enum BlockPattern {
+        case basketWeave
+        case churnDash
+        case doubleCross
+        case logCabin
     }
     
     weak var blockVC: BlockViewController?

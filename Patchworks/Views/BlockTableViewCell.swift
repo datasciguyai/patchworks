@@ -1,5 +1,5 @@
 //
-//  BlockCollectionViewCell.swift
+//  BlockTableViewCell.swift
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/20/17.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class BlockCollectionViewCell: UICollectionViewCell {
+class BlockTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var blockImageView: UIImageView!
-    
+    @IBOutlet weak var blockThumbnailImageView: UIImageView!
 }

@@ -32,7 +32,7 @@ class BlockController {
         
         guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL else { return }
         
-        let previewImageFileName: String = "\(UUID().uuidString).jpeg"
+        let previewImageFileName: String = "\(Date.timeIntervalSinceReferenceDate).jpeg"
         
         try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(previewImageFileName))
         
@@ -60,6 +60,10 @@ class BlockController {
             try? FileManager.default.removeItem(at: shapesURL.appendingPathComponent(imageFileName))
             }
         }
+        guard let blockURL = blockThumbnailsDirectoryURL, let blockImageFileName = block.previewImageFileName else { return }
+        
+        try? FileManager.default.removeItem(at: blockURL.appendingPathComponent(blockImageFileName))
+        
         managedObjectContext.delete(block)
         saveToPersistentStore()
     }
