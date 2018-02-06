@@ -11,7 +11,7 @@ import CoreData
 
 class BlockListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var fetchedResultsController: NSFetchedResultsController<Block>!
+    private var fetchedResultsController: NSFetchedResultsController<Block>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    func configureFetchedResultsController() {
+    private func configureFetchedResultsController() {
         if fetchedResultsController == nil {
             let fetchRequest: NSFetchRequest<Block> = Block.fetchRequest()
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "previewImageFileName", ascending: false)]
@@ -40,7 +40,6 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
     // MARK: - Table view data source
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
 //        return 0
 //    }
 
@@ -55,6 +54,8 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
         guard let blocks = fetchedResultsController.fetchedObjects, let previewImageFileName = blocks[indexPath.row].previewImageFileName, let blockImagePath = BlockController.shared.blockThumbnailsDirectoryURL?.appendingPathComponent(previewImageFileName).path else { return cell }
         
         cell.blockThumbnailImageView.image = UIImage(contentsOfFile: blockImagePath)
+        cell.titleLabel.text = blocks[indexPath.row].title
+        cell.notesLabel.text = blocks[indexPath.row].notes
 
         return cell
     }
@@ -67,19 +68,12 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
         return true
     }
     */
-
     
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
             guard let blocks = fetchedResultsController.fetchedObjects else { return }
             BlockController.shared.delete(block: blocks[indexPath.row])
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-        } /*else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }*/
+        }
     }
     
 
@@ -104,7 +98,6 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let blockViewController = segue.destination as? BlockViewController, let blocks = fetchedResultsController.fetchedObjects, let indexPath = tableView.indexPathForSelectedRow else { return }
         if segue.identifier == "toBlockViewController" {
-            blockViewController.hidesBottomBarWhenPushed = true
             blockViewController.block = blocks[indexPath.row]
         }
     }

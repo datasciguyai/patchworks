@@ -10,14 +10,13 @@ import UIKit
 
 class BlockTemplatesCollectionViewController: UICollectionViewController {
     
-    let blockStrings = BlockTemplateController.blockTemplates
+    private let blockStrings = BlockTemplateController.blockTemplates
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let blockViewController = segue.destination as? BlockViewController, let indexPath = collectionView?.indexPathsForSelectedItems?.first else { return }
         if segue.identifier == "toBlockViewController" {
-            blockViewController.hidesBottomBarWhenPushed = true
             blockViewController.blockView = BlockView(blockPattern: BlockTemplateController.blockTemplates[indexPath.row].blockTemplatePattern)
         }
     }

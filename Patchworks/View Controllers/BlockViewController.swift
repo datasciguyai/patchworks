@@ -9,8 +9,10 @@
 import UIKit
 import CoreData
 
-class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ShapeDelegate {
+class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ShapeDelegate {
     
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var blockViewContainer: UIView!
     @IBOutlet weak var notesTextView: UITextView!
     
     var blockView: BlockView?
@@ -21,9 +23,11 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
         }
     }
     
+    private let r = UIApplication.shared.keyWindow?.rootViewController as! TabBarController
+    
     private var shapeView = ShapeView()
     
-    private var updatedShapeViews: [ShapeView]?
+    private var updatedShapeViews = [ShapeView]()
     
     private var blockThumbnailData: Data? {
         guard let blockView = blockView else { return nil }
@@ -36,31 +40,24 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
         return UIImageJPEGRepresentation(blockPreviewImage, 1.0)
     }
     
-    var fetchedResultsController: NSFetchedResultsController<Shape>!
-    
-    func configureFetchedResultsController() {
-        guard let block = block else { return }
-        if fetchedResultsController == nil {
-            let fetchRequest: NSFetchRequest<Shape> = Shape.fetchRequest()
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "imageFileName", ascending: true)]
-            fetchedResultsController = NSFetchedResultsController<Shape>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchedResultsController.delegate = self
-        }
-        fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "block == %@", block)
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            NSLog("Error starting fetched results controller  \(error)")
-        }
-    }
+    private var fetchedResultsController: NSFetchedResultsController<Shape>!
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let blockView = blockView, let shapeViews = blockView.shapeViews else { return }
+        guard let blockView = blockView, let shapeViews = blockView.shapeViews, let titleText = titleTextField.text, !titleText.isEmpty else {
+            
+            let alertController = UIAlertController(title: nil, message: "Please enter a title before saving.", preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
         
         if let block = block {
-            guard let blockThumbnailData = blockThumbnailData, let shapes = fetchedResultsController.fetchedObjects, let updatedShapeViews = updatedShapeViews else { return }
+            guard let blockThumbnailData = blockThumbnailData, let shapes = fetchedResultsController.fetchedObjects else { return }
             
-            BlockController.shared.update(block: block, blockThumbnailData: blockThumbnailData, title: "test", notes: nil)
+            BlockController.shared.update(block: block, blockThumbnailData: blockThumbnailData, title: titleText, notes: notesTextView.text)
             
             for shapeView in updatedShapeViews {
                 var imageData: Data? = nil
@@ -73,11 +70,11 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
                 ShapeController.shared.update(shape: shapes[index], imageData: imageData)
                 
             }
-            self.updatedShapeViews?.removeAll()
+            updatedShapeViews.removeAll()
         } else {
             guard let blockThumbnailData = blockThumbnailData else { return }
             
-            BlockController.shared.createBlockWith(blockThumbnailData: blockThumbnailData, title: "test", notes: nil)
+            BlockController.shared.createBlockWith(blockThumbnailData: blockThumbnailData, title: titleText, notes: notesTextView.text)
             
             guard let block = BlockController.shared.block else { return }
             
@@ -95,54 +92,110 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
         navigationController?.popViewController(animated: true)
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let blockView = blockView {
-            blockView.blockVC = self
-            view.addSubview(blockView)
-            addConstraints(blockView: blockView)
-        } else {
-            var shapeViews = [ShapeView]()
-            guard let shapes = fetchedResultsController.fetchedObjects else { return }
-            for shape in shapes {
-                guard let frame = shape.rect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return }
-                
-                if let imageFileName = shape.imageFileName{
-                    
-                    guard let shapeImageURL = ShapeController.shared.shapeImagesDirectoryURL else { continue }
-                    
-                    let image = UIImage(contentsOfFile: shapeImageURL.appendingPathComponent(imageFileName).path)
-                    
-                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
-                } else {
-                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
-                }
-            }
-            
-            blockView = BlockView(shapesViews: shapeViews)
-            guard let blockView = blockView else { return }
-            blockView.blockVC = self
-            view.addSubview(blockView)
-            addConstraints(blockView: blockView)
+    private func configureFetchedResultsController() {
+        guard let block = block else { return }
+        if fetchedResultsController == nil {
+            let fetchRequest: NSFetchRequest<Shape> = Shape.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "imageFileName", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController<Shape>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController.delegate = self
+        }
+        fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "block == %@", block)
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            NSLog("Error starting fetched results controller  \(error)")
         }
     }
     
-    func addConstraints(blockView: BlockView) {
-        blockView.translatesAutoresizingMaskIntoConstraints = false
-        notesTextView.translatesAutoresizingMaskIntoConstraints = false
-        let blockViewHeight = NSLayoutConstraint(item: blockView, attribute: .height, relatedBy: .equal, toItem: blockView, attribute: .width, multiplier: 1.0, constant: 0.0)
-        let blockViewWidth = NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: UIScreen.main.bounds.maxX - 16)
-        blockView.addConstraints([blockViewHeight, blockViewWidth])
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !UIDevice.current.orientation.isPortrait {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            tabBarController?.tabBar.isHidden = true
+        }
+        r.autorotatable = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        r.autorotatable = true
+    }
+    
+    override func keyboardWillShow(notification: Notification) {
+        super.keyboardWillShow(notification: notification)
+        blockView?.isUserInteractionEnabled = false
+    }
+    
+    override func keyboardWillHide(notification: Notification) {
+        super.keyboardWillHide(notification: notification)
+        blockView?.isUserInteractionEnabled = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        notesTextView.delegate = self
+        titleTextField.delegate = self
+        if let blockView = blockView {
+            blockView.blockVC = self
+            blockViewContainer.addSubview(blockView)
+            addConstraintsFor(blockView: blockView)
+        } else {
+//            var shapeViews = [ShapeView]()
+//            guard let shapes = fetchedResultsController.fetchedObjects else { return }
+//            for shape in shapes {
+//                guard let frame = shape.rect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return }
+//
+//                if let imageFileName = shape.imageFileName{
+//
+//                    guard let shapeImageURL = ShapeController.shared.shapeImagesDirectoryURL else { continue }
+//
+//                    let image = UIImage(contentsOfFile: shapeImageURL.appendingPathComponent(imageFileName).path)
+//
+//                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
+//                } else {
+//                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
+//                }
+//            }
+            titleTextField.text = block?.title
+            notesTextView.text = block?.notes
+//            blockView = BlockView(shapesViews: shapeViews)
+            blockView = setupBlockView
+            guard let blockView = blockView else { return }
+            blockView.blockVC = self
+            blockViewContainer.addSubview(blockView)
+            addConstraintsFor(blockView: blockView)
+        }
+    }
+    
+    var setupBlockView: BlockView? {
         
-        let notesTextViewTop = NSLayoutConstraint(item: notesTextView, attribute: .top, relatedBy: .equal, toItem: blockView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-        let notesTextViewBottom = NSLayoutConstraint(item: notesTextView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-        let notesTextViewLeading = NSLayoutConstraint(item: notesTextView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0)
-        let notesTextViewTrailing = NSLayoutConstraint(item: notesTextView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-        let blockViewX = NSLayoutConstraint(item: blockView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        let blockViewY = blockView.safeAreaLayoutGuide.topAnchor.constraintEqualToSystemSpacingBelow(view.topAnchor, multiplier: 9.0)
-        let notesTextViewX = NSLayoutConstraint(item: notesTextView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        view.addConstraints([notesTextViewTop, notesTextViewBottom, notesTextViewLeading, notesTextViewTrailing, blockViewX, blockViewY, notesTextViewX])
+        var shapeViews = [ShapeView]()
+        guard let shapes = fetchedResultsController.fetchedObjects else { return nil}
+        for shape in shapes {
+            guard let frame = shape.rect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return nil}
+            
+            if let imageFileName = shape.imageFileName{
+                
+                guard let shapeImageURL = ShapeController.shared.shapeImagesDirectoryURL else { continue }
+                
+                let image = UIImage(contentsOfFile: shapeImageURL.appendingPathComponent(imageFileName).path)
+                
+                shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
+            } else {
+                shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
+            }
+        }
+        return BlockView(shapesViews: shapeViews)
+    }
+    
+    func addConstraintsFor(blockView: BlockView) {
+        blockView.translatesAutoresizingMaskIntoConstraints = false
+        let blockViewLeading = NSLayoutConstraint(item: blockView, attribute: .leading, relatedBy: .equal, toItem: blockViewContainer, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let blockViewTrailing = NSLayoutConstraint(item: blockView, attribute: .trailing, relatedBy: .equal, toItem: blockViewContainer, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        let blockViewTop = NSLayoutConstraint(item: blockView, attribute: .top, relatedBy: .equal, toItem: blockViewContainer, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let blockViewBottom = NSLayoutConstraint(item: blockView, attribute: .bottom, relatedBy: .equal, toItem: blockViewContainer, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        blockViewContainer.addConstraints([blockViewLeading, blockViewTrailing, blockViewTop, blockViewBottom])
     }
     
     func shapeClicked(_ sender: ShapeView) {
@@ -172,10 +225,7 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
         
         if shapeView.image != nil {
             alertController.addAction(UIAlertAction(title: "Delete Image", style: .destructive) { _ in
-                if self.updatedShapeViews == nil {
-                    self.updatedShapeViews = [ShapeView]()
-                }
-                self.updatedShapeViews?.append(self.shapeView)
+                self.updatedShapeViews.append(self.shapeView)
                 self.shapeView.removeImage()
             })
         }
@@ -188,18 +238,11 @@ class BlockViewController: UIViewController, NSFetchedResultsControllerDelegate,
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
         shapeView.image = pickedImage
-        
-        if updatedShapeViews == nil {
-            updatedShapeViews = [ShapeView]()
-        }
-        updatedShapeViews?.append(shapeView)
+        updatedShapeViews.append(shapeView)
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
 }

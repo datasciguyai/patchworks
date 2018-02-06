@@ -32,6 +32,8 @@
 		3FBACED01FEB086B002E2250 /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACECF1FEB086B002E2250 /* BlockTableViewCell.swift */; };
 		3FBACED21FEB6809002E2250 /* BlockTemplatesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED11FEB6809002E2250 /* BlockTemplatesCollectionViewController.swift */; };
 		3FBACED41FFD714B002E2250 /* UIColor+ShapeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */; };
+		3FBF121220215FA7006E78C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBF121120215FA6006E78C6 /* TabBarController.swift */; };
+		3FEBBB3E2029229200E3D500 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEBBB3D2029229200E3D500 /* ShiftableViewController.swift */; };
 		3FF8CBDA1FD9A93000CADA77 /* BlockView+LogCabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 		3FBACECF1FEB086B002E2250 /* BlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		3FBACED11FEB6809002E2250 /* BlockTemplatesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTemplatesCollectionViewController.swift; sourceTree = "<group>"; };
 		3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ShapeColor.swift"; sourceTree = "<group>"; };
+		3FBF121120215FA6006E78C6 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		3FEBBB3D2029229200E3D500 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
 		3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+LogCabin.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +105,8 @@
 				3FB45BCE2016A8C6005D1B2B /* BlockListTableViewController.swift */,
 				3FBACED11FEB6809002E2250 /* BlockTemplatesCollectionViewController.swift */,
 				3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */,
+				3FEBBB3D2029229200E3D500 /* ShiftableViewController.swift */,
+				3FBF121120215FA6006E78C6 /* TabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -256,7 +262,9 @@
 				3F6C57BF20195E5000F41BE7 /* BlockTemplate.swift in Sources */,
 				3F3D928F1FE1B7300013F743 /* BlockView+DoubleCross.swift in Sources */,
 				3F31F85D1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift in Sources */,
+				3FBF121220215FA7006E78C6 /* TabBarController.swift in Sources */,
 				3FB45BD12017D1C4005D1B2B /* BlockTemplateCollectionViewCell.swift in Sources */,
+				3FEBBB3E2029229200E3D500 /* ShiftableViewController.swift in Sources */,
 				3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */,
 				3F3D92911FE1DA3E0013F743 /* BlockView+BasketWeave.swift in Sources */,
 				3FBACECA1FEACDF6002E2250 /* CoreDataStack.swift in Sources */,

@@ -36,20 +36,19 @@ class BlockController {
         
         try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(previewImageFileName))
         
-        block = Block(title: title, notes: nil, previewImageFileName: previewImageFileName)
+        block = Block(title: title, notes: notes, previewImageFileName: previewImageFileName)
     }
     
     // MARK: - Update
     
     func update(block: Block, blockThumbnailData: Data, title: String, notes: String? = nil) {
-            guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL, let previewImageFileName = block.previewImageFileName else { return }
+        guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL, let previewImageFileName = block.previewImageFileName else { return }
         
         try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(previewImageFileName))
         
         block.title = title
         block.notes = notes
-        
-        }
+    }
     
     // MARK: - Delete
     
@@ -57,7 +56,7 @@ class BlockController {
         guard let managedObjectContext = block.managedObjectContext, let shapesURL = ShapeController.shared.shapeImagesDirectoryURL, let shapes = block.rawShapes?.array as? [Shape] else { return }
         for shape in shapes {
             if let imageFileName = shape.imageFileName {
-            try? FileManager.default.removeItem(at: shapesURL.appendingPathComponent(imageFileName))
+                try? FileManager.default.removeItem(at: shapesURL.appendingPathComponent(imageFileName))
             }
         }
         guard let blockURL = blockThumbnailsDirectoryURL, let blockImageFileName = block.previewImageFileName else { return }
@@ -74,7 +73,7 @@ class BlockController {
         do {
             try CoreDataStack.context.save()
         } catch let error {
-            print("There was a problem saving to the peristent store: \(error)")
+            print("There was a problem saving to the persistent store: \(error)")
         }
     }
     

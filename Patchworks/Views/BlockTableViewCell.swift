@@ -11,4 +11,6 @@ import UIKit
 class BlockTableViewCell: UITableViewCell {
     
     @IBOutlet weak var blockThumbnailImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var notesLabel: UILabel!
 }

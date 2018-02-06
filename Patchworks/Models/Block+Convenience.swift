@@ -9,7 +9,7 @@
 import CoreData
 
 extension Block {
-    @discardableResult convenience init(title: String, notes: String? = nil, previewImageFileName: String, context: NSManagedObjectContext = CoreDataStack.context) {
+    @discardableResult convenience init(title: String, notes: String? = nil, previewImageFileName: String, isFavorite: Bool? = nil, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.title = title
         self.notes = notes
