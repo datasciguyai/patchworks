@@ -47,6 +47,11 @@ class ShiftableViewController: UIViewController, UIGestureRecognizerDelegate, UI
         return true
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        stopTextInput()
+        return true
+    }
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textFieldBeingEdited = textField
         return true

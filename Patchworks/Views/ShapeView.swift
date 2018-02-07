@@ -48,7 +48,7 @@ class ShapeView: UIView {
                 context.saveGState()
                 shapePath.addClip()
                 context.scaleBy(x: 1, y: -1)
-                context.draw(image, in: CGRect(x: bounds.minX, y: bounds.minY, width: CGFloat(200), height: CGFloat(200)), byTiling: true)
+                context.draw(image, in: CGRect(x: bounds.minX, y: bounds.minY, width: CGFloat(shapePath.bounds.width), height: CGFloat(shapePath.bounds.height)), byTiling: true)
                 context.restoreGState()
 //                UIColor.black.setStroke()
 //                shapePath.lineJoinStyle = .round

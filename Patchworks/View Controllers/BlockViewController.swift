@@ -31,9 +31,10 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     private var blockThumbnailData: Data? {
         guard let blockView = blockView else { return nil }
-        let blockThumbnailWidth = blockView.bounds.width / 2
-        let blockThumbnailHeight = blockView.bounds.height / 2
-        UIGraphicsBeginImageContext(CGSize(width: blockThumbnailWidth, height: blockThumbnailHeight))
+        let blockThumbnailWidth = blockView.bounds.width
+        let blockThumbnailHeight = blockView.bounds.height
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: blockThumbnailWidth, height: blockThumbnailHeight), false, 0.0)
+        //        UIGraphicsBeginImageContext(CGSize(width: blockThumbnailWidth, height: blockThumbnailHeight))
         blockView.drawHierarchy(in: CGRect(x: 0, y: 0, width: blockThumbnailWidth, height: blockThumbnailHeight), afterScreenUpdates: true)
         guard let blockPreviewImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         UIGraphicsEndImageContext()
@@ -141,25 +142,8 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
             blockViewContainer.addSubview(blockView)
             addConstraintsFor(blockView: blockView)
         } else {
-//            var shapeViews = [ShapeView]()
-//            guard let shapes = fetchedResultsController.fetchedObjects else { return }
-//            for shape in shapes {
-//                guard let frame = shape.rect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return }
-//
-//                if let imageFileName = shape.imageFileName{
-//
-//                    guard let shapeImageURL = ShapeController.shared.shapeImagesDirectoryURL else { continue }
-//
-//                    let image = UIImage(contentsOfFile: shapeImageURL.appendingPathComponent(imageFileName).path)
-//
-//                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
-//                } else {
-//                    shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
-//                }
-//            }
             titleTextField.text = block?.title
             notesTextView.text = block?.notes
-//            blockView = BlockView(shapesViews: shapeViews)
             blockView = setupBlockView
             guard let blockView = blockView else { return }
             blockView.blockVC = self
@@ -212,16 +196,17 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             alertController.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
                 imagePicker.sourceType = .photoLibrary
+                imagePicker.allowsEditing = true
                 self.present(imagePicker, animated: true)
             })
         }
         
-        //        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-        //            alertController.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
-        //                imagePicker.sourceType = .camera
-        //                self.present(imagePicker, animated: true)
-        //            })
-        //        }
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            alertController.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
+//                imagePicker.sourceType = .camera
+//                self.present(imagePicker, animated: true)
+//            })
+//        }
         
         if shapeView.image != nil {
             alertController.addAction(UIAlertAction(title: "Delete Image", style: .destructive) { _ in
@@ -236,8 +221,19 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        shapeView.image = pickedImage
+        guard let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        let shapeWidth = shapeView.bounds.width
+        let shapeHeight = shapeView.bounds.height
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: shapeWidth, height: shapeHeight), true, 0)
+        
+        let m = max(shapeWidth, shapeHeight)
+        
+        pickedImage.draw(in: CGRect(origin: .zero, size: CGSize(width: m, height: m)))
+        
+        shapeView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        
         updatedShapeViews.append(shapeView)
         dismiss(animated: true, completion: nil)
     }
