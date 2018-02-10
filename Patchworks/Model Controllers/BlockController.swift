@@ -32,17 +32,17 @@ class BlockController {
         
         guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL else { return }
         
-        let previewImageFileName: String = "\(Date.timeIntervalSinceReferenceDate).jpeg"
+        let blockThumbnailFileName: String = "\(Date.timeIntervalSinceReferenceDate).jpeg"
         
-        try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(previewImageFileName))
+        try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(blockThumbnailFileName))
         
-        block = Block(title: title, notes: notes, previewImageFileName: previewImageFileName)
+        block = Block(title: title, notes: notes, thumbnailFileName: blockThumbnailFileName)
     }
     
     // MARK: - Update
     
     func update(block: Block, blockThumbnailData: Data, title: String, notes: String? = nil) {
-        guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL, let previewImageFileName = block.previewImageFileName else { return }
+        guard let blockThumbnailsDirectoryURL = blockThumbnailsDirectoryURL, let previewImageFileName = block.thumbnailFileName else { return }
         
         try? blockThumbnailData.write(to: blockThumbnailsDirectoryURL.appendingPathComponent(previewImageFileName))
         
@@ -59,7 +59,7 @@ class BlockController {
                 try? FileManager.default.removeItem(at: shapesURL.appendingPathComponent(imageFileName))
             }
         }
-        guard let blockURL = blockThumbnailsDirectoryURL, let blockImageFileName = block.previewImageFileName else { return }
+        guard let blockURL = blockThumbnailsDirectoryURL, let blockImageFileName = block.thumbnailFileName else { return }
         
         try? FileManager.default.removeItem(at: blockURL.appendingPathComponent(blockImageFileName))
         

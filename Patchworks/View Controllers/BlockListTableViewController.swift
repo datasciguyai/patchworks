@@ -26,7 +26,7 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
     private func configureFetchedResultsController() {
         if fetchedResultsController == nil {
             let fetchRequest: NSFetchRequest<Block> = Block.fetchRequest()
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "previewImageFileName", ascending: false)]
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "thumbnailFileName", ascending: false)]
             fetchedResultsController = NSFetchedResultsController<Block>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
@@ -51,7 +51,7 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "blockListTableViewCell", for: indexPath) as? BlockTableViewCell else { return UITableViewCell()}
 
-        guard let blocks = fetchedResultsController.fetchedObjects, let previewImageFileName = blocks[indexPath.row].previewImageFileName, let blockImagePath = BlockController.shared.blockThumbnailsDirectoryURL?.appendingPathComponent(previewImageFileName).path else { return cell }
+        guard let blocks = fetchedResultsController.fetchedObjects, let previewImageFileName = blocks[indexPath.row].thumbnailFileName, let blockImagePath = BlockController.shared.blockThumbnailsDirectoryURL?.appendingPathComponent(previewImageFileName).path else { return cell }
         
         cell.blockThumbnailImageView.image = UIImage(contentsOfFile: blockImagePath)
         cell.titleLabel.text = blocks[indexPath.row].title

@@ -34,7 +34,6 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         let blockThumbnailWidth = blockView.bounds.width
         let blockThumbnailHeight = blockView.bounds.height
         UIGraphicsBeginImageContextWithOptions(CGSize(width: blockThumbnailWidth, height: blockThumbnailHeight), false, 0.0)
-        //        UIGraphicsBeginImageContext(CGSize(width: blockThumbnailWidth, height: blockThumbnailHeight))
         blockView.drawHierarchy(in: CGRect(x: 0, y: 0, width: blockThumbnailWidth, height: blockThumbnailHeight), afterScreenUpdates: true)
         guard let blockPreviewImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         UIGraphicsEndImageContext()

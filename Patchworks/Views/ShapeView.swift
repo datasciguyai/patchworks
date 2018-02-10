@@ -56,9 +56,9 @@ class ShapeView: UIView {
             }
         } else {
             shapePath.lineWidth = 5.0
-            fillColor.setFill()
+            fillColor?.setFill()
             shapePath.fill()
-            strokeColor.setStroke()
+            strokeColor?.setStroke()
             shapePath.stroke()
         }
         return shapePath

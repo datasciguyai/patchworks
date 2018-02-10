@@ -9,8 +9,6 @@
 import UIKit
 
 extension UIColor {
-    
-    static let shapeStrokeColor = UIColor(red: 0.889, green: 0.000, blue: 1.000, alpha: 1.000)
-    
-    static let shapeFillColor = shapeStrokeColor.withAlphaComponent(0.3)
+    static let shapeStrokeColor = UIColor(named: "blockColor")
+    static let shapeFillColor = shapeStrokeColor?.withAlphaComponent(0.3)
 }
