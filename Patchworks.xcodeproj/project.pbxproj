@@ -87,14 +87,10 @@
 				3FBACECF1FEB086B002E2250 /* BlockTableViewCell.swift */,
 				3FB45BD02017D1C4005D1B2B /* BlockTemplateCollectionViewCell.swift */,
 				3F2E103B1FD84CC400AFFC10 /* BlockView.swift */,
-				3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */,
-				3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */,
-				3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */,
-				3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */,
 				3F87D1C21FD8950B003AC8F5 /* ShapeView.swift */,
-				3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */,
-				3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */,
 				3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */,
+				3F3787B9202FB122008EA30E /* Blocks */,
+				3F3787BA202FB13E008EA30E /* Shapes */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +127,26 @@
 				3F0472F61FFDE16700B3C983 /* ShapeController.swift */,
 			);
 			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		3F3787B9202FB122008EA30E /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */,
+				3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */,
+				3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */,
+				3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */,
+			);
+			path = Blocks;
+			sourceTree = "<group>";
+		};
+		3F3787BA202FB13E008EA30E /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */,
+				3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 		3F4032931FA0F2FC00EAEBE9 = {
