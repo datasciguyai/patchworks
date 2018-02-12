@@ -16,7 +16,7 @@ class ShapeController {
     
     // MARK: - Create
     
-    func createShapeWith(shapeImageData: Data? = nil, rect: String, rotation: Float, type: String, block: Block) {
+    func createShapeWith(shapeImageData: Data? = nil, rawRect: String, rotation: Float, type: String, block: Block) {
         
         guard let shapeImagesDirectoryURL = shapeImagesDirectoryURL else { return }
         
@@ -24,7 +24,7 @@ class ShapeController {
         
         try? shapeImageData?.write(to: shapeImagesDirectoryURL.appendingPathComponent(imageFileName))
         
-        Shape(rect: rect, rotation: rotation, imageFileName: imageFileName, type: type, block: block)
+        Shape(rawRect: rawRect, rotation: rotation, imageFileName: imageFileName, type: type, block: block)
         
     }
     

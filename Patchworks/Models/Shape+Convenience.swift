@@ -9,9 +9,9 @@
 import CoreData
 
 extension Shape {
-    @discardableResult convenience init(rect: String, rotation: Float, imageFileName: String? = nil, type: String, block: Block, context: NSManagedObjectContext = CoreDataStack.context) {
+    @discardableResult convenience init(rawRect: String, rotation: Float, imageFileName: String? = nil, type: String, block: Block, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
-        self.rect = rect
+        self.rawRect = rawRect
         self.rotation = rotation
         self.imageFileName = imageFileName
         self.type = type

@@ -279,13 +279,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="blockTemplates" width="92" height="92"/>
-        <image name="myBlocks" width="92" height="92"/>
+        <image name="blockTemplates" width="46" height="46"/>
+        <image name="myBlocks" width="46" height="46"/>
         <namedColor name="background">
             <color red="0.90588235294117647" green="0.89803921568627454" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xjw-AK-Er7"/>
+        <segue reference="mik-lg-mcQ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -14,18 +14,6 @@ class BlockController {
     
     var block: Block?
     
-    // MARK: - Retrieve
-    
-    var blocks: [Block] {
-        let request: NSFetchRequest<Block> = Block.fetchRequest()
-        do {
-            return try CoreDataStack.context.fetch(request)
-        } catch let error {
-            print("There was a problem fetching objects: \(error)")
-        }
-        return []
-    }
-    
     // MARK: - Create
     
     func createBlockWith(blockThumbnailData: Data, title: String, notes: String? = nil) {
@@ -38,6 +26,18 @@ class BlockController {
         
         block = Block(title: title, notes: notes, thumbnailFileName: blockThumbnailFileName)
     }
+    
+    // MARK: - Retrieve
+    
+    //    private var blocks: [Block] {
+    //        let request: NSFetchRequest<Block> = Block.fetchRequest()
+    //        do {
+    //            return try CoreDataStack.context.fetch(request)
+    //        } catch let error {
+    //            print("There was a problem fetching objects: \(error)")
+    //        }
+    //        return []
+    //    }
     
     // MARK: - Update
     
@@ -53,7 +53,7 @@ class BlockController {
     // MARK: - Delete
     
     func delete(block: Block) {
-        guard let managedObjectContext = block.managedObjectContext, let shapesURL = ShapeController.shared.shapeImagesDirectoryURL, let shapes = block.rawShapes?.array as? [Shape] else { return }
+        guard let managedObjectContext = block.managedObjectContext, let shapesURL = ShapeController.shared.shapeImagesDirectoryURL, let shapes = block.shapes?.array as? [Shape] else { return }
         for shape in shapes {
             if let imageFileName = shape.imageFileName {
                 try? FileManager.default.removeItem(at: shapesURL.appendingPathComponent(imageFileName))

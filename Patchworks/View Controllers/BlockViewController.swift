@@ -23,7 +23,7 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         }
     }
     
-    private let r = UIApplication.shared.keyWindow?.rootViewController as! TabBarController
+    private let tbController = UIApplication.shared.keyWindow?.rootViewController as! TabBarController
     
     private var shapeView = ShapeView()
     
@@ -81,9 +81,9 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
             for shapeView in shapeViews {
                 if let image = shapeView.image {
                     guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { continue }
-                    ShapeController.shared.createShapeWith(shapeImageData: imageData,rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
+                    ShapeController.shared.createShapeWith(shapeImageData: imageData,rawRect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
                 } else {
-                    ShapeController.shared.createShapeWith(rect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
+                    ShapeController.shared.createShapeWith(rawRect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
                 }
             }
         }
@@ -114,12 +114,12 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
             tabBarController?.tabBar.isHidden = true
         }
-        r.autorotatable = false
+        tbController.autorotatable = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        r.autorotatable = true
+        tbController.autorotatable = true
     }
     
     override func keyboardWillShow(notification: Notification) {
@@ -156,7 +156,7 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         var shapeViews = [ShapeView]()
         guard let shapes = fetchedResultsController.fetchedObjects else { return nil}
         for shape in shapes {
-            guard let frame = shape.rect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return nil}
+            guard let rawRect = shape.rawRect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return nil}
             
             if let imageFileName = shape.imageFileName{
                 
@@ -164,9 +164,9 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
                 
                 let image = UIImage(contentsOfFile: shapeImageURL.appendingPathComponent(imageFileName).path)
                 
-                shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
+                shapeViews.append(ShapeView(frame: CGRectFromString(rawRect), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
             } else {
-                shapeViews.append(ShapeView(frame: CGRectFromString(frame), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
+                shapeViews.append(ShapeView(frame: CGRectFromString(rawRect), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
             }
         }
         return BlockView(shapesViews: shapeViews)
