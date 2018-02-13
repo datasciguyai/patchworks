@@ -31,8 +31,8 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     private var blockThumbnailData: Data? {
         guard let blockView = blockView else { return nil }
-        let blockThumbnailWidth = blockView.bounds.width
-        let blockThumbnailHeight = blockView.bounds.height
+        let blockThumbnailWidth = 128
+        let blockThumbnailHeight = 128
         UIGraphicsBeginImageContextWithOptions(CGSize(width: blockThumbnailWidth, height: blockThumbnailHeight), false, 0.0)
         blockView.drawHierarchy(in: CGRect(x: 0, y: 0, width: blockThumbnailWidth, height: blockThumbnailHeight), afterScreenUpdates: true)
         guard let blockPreviewImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
@@ -190,7 +190,7 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
-        let alertController = UIAlertController(title: "Photo Picker", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Fabric Picker", message: nil, preferredStyle: .actionSheet)
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             alertController.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in

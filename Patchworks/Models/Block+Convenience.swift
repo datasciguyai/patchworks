@@ -9,12 +9,12 @@
 import CoreData
 
 extension Block {
-    @discardableResult convenience init(title: String, notes: String? = nil, thumbnailFileName: String, isFavorite: Bool = false, order: Int16 = 0, context: NSManagedObjectContext = CoreDataStack.context) {
+    @discardableResult convenience init(title: String, notes: String? = nil, thumbnailFileName: String, isFavorite: Bool = false, position: Int16 = 0, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.title = title
         self.notes = notes
         self.isFavorite = isFavorite
-        self.order = order
+        self.position = position
         self.thumbnailFileName = thumbnailFileName
     }
 }

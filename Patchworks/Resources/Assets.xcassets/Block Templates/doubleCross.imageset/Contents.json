@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "double-cross@1x.png",
+      "filename" : "double_cross@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "double-cross@2x.png",
+      "filename" : "double_cross@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "double-cross@3x.png",
+      "filename" : "double_cross@3x.png",
       "scale" : "3x"
     }
   ],
