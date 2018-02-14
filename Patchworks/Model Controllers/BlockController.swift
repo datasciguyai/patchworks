@@ -53,10 +53,10 @@ class BlockController {
     // MARK: - Delete
     
     func delete(block: Block) {
-        guard let managedObjectContext = block.managedObjectContext, let shapesURL = ShapeController.shared.shapeImagesDirectoryURL, let shapes = block.shapes?.array as? [Shape] else { return }
-        for shape in shapes {
-            if let imageFileName = shape.imageFileName {
-                try? FileManager.default.removeItem(at: shapesURL.appendingPathComponent(imageFileName))
+        guard let managedObjectContext = block.managedObjectContext, let patchesURL = PatchController.shared.patchImagesDirectoryURL, let patches = block.patches?.array as? [Patch] else { return }
+        for patch in patches {
+            if let imageFileName = patch.imageFileName {
+                try? FileManager.default.removeItem(at: patchesURL.appendingPathComponent(imageFileName))
             }
         }
         guard let blockURL = blockThumbnailsDirectoryURL, let blockImageFileName = block.thumbnailFileName else { return }

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ShapeDelegate {
+class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, PatchDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var blockViewContainer: UIView!
@@ -25,9 +25,9 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     private let tbController = UIApplication.shared.keyWindow?.rootViewController as! TabBarController
     
-    private var shapeView = ShapeView()
+    private var patchView = PatchView()
     
-    private var updatedShapeViews = [ShapeView]()
+    private var updatedPatchViews = [PatchView]()
     
     private var blockThumbnailData: Data? {
         guard let blockView = blockView else { return nil }
@@ -40,10 +40,10 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         return UIImageJPEGRepresentation(blockPreviewImage, 1.0)
     }
     
-    private var fetchedResultsController: NSFetchedResultsController<Shape>!
+    private var fetchedResultsController: NSFetchedResultsController<Patch>!
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let blockView = blockView, let shapeViews = blockView.shapeViews, let titleText = titleTextField.text, !titleText.isEmpty else {
+        guard let blockView = blockView, let patchViews = blockView.patchViews, let titleText = titleTextField.text, !titleText.isEmpty else {
             
             let alertController = UIAlertController(title: nil, message: "Please enter a title before saving.", preferredStyle: .alert)
             
@@ -55,22 +55,22 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         }
         
         if let block = block {
-            guard let blockThumbnailData = blockThumbnailData, let shapes = fetchedResultsController.fetchedObjects else { return }
+            guard let blockThumbnailData = blockThumbnailData, let patches = fetchedResultsController.fetchedObjects else { return }
             
             BlockController.shared.update(block: block, blockThumbnailData: blockThumbnailData, title: titleText, notes: notesTextView.text)
             
-            for shapeView in updatedShapeViews {
+            for patchView in updatedPatchViews {
                 var imageData: Data? = nil
-                if let image = shapeView.image {
+                if let image = patchView.image {
                     imageData = UIImageJPEGRepresentation(image, 1.0)
                 }
                 
-                guard let index = shapeViews.index(of: shapeView) else { continue }
+                guard let index = patchViews.index(of: patchView) else { continue }
                 
-                ShapeController.shared.update(shape: shapes[index], imageData: imageData)
+                PatchController.shared.update(patch: patches[index], imageData: imageData)
                 
             }
-            updatedShapeViews.removeAll()
+            updatedPatchViews.removeAll()
         } else {
             guard let blockThumbnailData = blockThumbnailData else { return }
             
@@ -78,12 +78,12 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
             
             guard let block = BlockController.shared.block else { return }
             
-            for shapeView in shapeViews {
-                if let image = shapeView.image {
+            for patchView in patchViews {
+                if let image = patchView.image {
                     guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { continue }
-                    ShapeController.shared.createShapeWith(shapeImageData: imageData,rawRect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
+                    PatchController.shared.createPatchWith(patchImageData: imageData,rawRect: NSStringFromCGRect(patchView.originalFrame), rotationAngle: Float(patchView.rotationAngle), type: patchView.shape.rawValue, block: block)
                 } else {
-                    ShapeController.shared.createShapeWith(rawRect: NSStringFromCGRect(shapeView.originalFrame), rotation: Float(shapeView.rotation), type: shapeView.shapeType.rawValue, block: block)
+                    PatchController.shared.createPatchWith(rawRect: NSStringFromCGRect(patchView.originalFrame), rotationAngle: Float(patchView.rotationAngle), type: patchView.shape.rawValue, block: block)
                 }
             }
         }
@@ -95,9 +95,9 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     private func configureFetchedResultsController() {
         guard let block = block else { return }
         if fetchedResultsController == nil {
-            let fetchRequest: NSFetchRequest<Shape> = Shape.fetchRequest()
+            let fetchRequest: NSFetchRequest<Patch> = Patch.fetchRequest()
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "imageFileName", ascending: true)]
-            fetchedResultsController = NSFetchedResultsController<Shape>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController = NSFetchedResultsController<Patch>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
         fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "block == %@", block)
@@ -153,23 +153,23 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     var setupBlockView: BlockView? {
         
-        var shapeViews = [ShapeView]()
-        guard let shapes = fetchedResultsController.fetchedObjects else { return nil}
-        for shape in shapes {
-            guard let rawRect = shape.rawRect, let shapeType = shape.type, let shapeViewShape = ShapeView.ShapeType(rawValue: shapeType) else { return nil}
+        var patchViews = [PatchView]()
+        guard let patches = fetchedResultsController.fetchedObjects else { return nil}
+        for patch in patches {
+            guard let rawRect = patch.rawRect, let shape = patch.shape, let patchViewShape = PatchView.Shape(rawValue: shape) else { return nil}
             
-            if let imageFileName = shape.imageFileName{
+            if let imageFileName = patch.imageFileName{
                 
-                guard let shapeImageURL = ShapeController.shared.shapeImagesDirectoryURL else { continue }
+                guard let patchImageURL = PatchController.shared.patchImagesDirectoryURL else { continue }
                 
-                let image = UIImage(contentsOfFile: shapeImageURL.appendingPathComponent(imageFileName).path)
+                let image = UIImage(contentsOfFile: patchImageURL.appendingPathComponent(imageFileName).path)
                 
-                shapeViews.append(ShapeView(frame: CGRectFromString(rawRect), rotation: CGFloat(shape.rotation), image: image, shapeType: shapeViewShape))
+                patchViews.append(PatchView(frame: CGRectFromString(rawRect), rotationAngle: CGFloat(patch.rotationAngle), image: image, shape: patchViewShape))
             } else {
-                shapeViews.append(ShapeView(frame: CGRectFromString(rawRect), rotation: CGFloat(shape.rotation), shapeType: shapeViewShape))
+                patchViews.append(PatchView(frame: CGRectFromString(rawRect), rotationAngle: CGFloat(patch.rotationAngle), shape: patchViewShape))
             }
         }
-        return BlockView(shapesViews: shapeViews)
+        return BlockView(patchViews: patchViews)
     }
     
     func addConstraintsFor(blockView: BlockView) {
@@ -181,8 +181,8 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         blockViewContainer.addConstraints([blockViewLeading, blockViewTrailing, blockViewTop, blockViewBottom])
     }
     
-    func shapeClicked(_ sender: ShapeView) {
-        shapeView = sender
+    func patchClicked(_ sender: PatchView) {
+        patchView = sender
         alertController()
     }
     
@@ -207,10 +207,10 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
 //            })
 //        }
         
-        if shapeView.image != nil {
+        if patchView.image != nil {
             alertController.addAction(UIAlertAction(title: "Delete Image", style: .destructive) { _ in
-                self.updatedShapeViews.append(self.shapeView)
-                self.shapeView.removeImage()
+                self.updatedPatchViews.append(self.patchView)
+                self.patchView.removeImage()
             })
         }
         
@@ -221,19 +221,19 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
-        let shapeWidth = shapeView.bounds.width
-        let shapeHeight = shapeView.bounds.height
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: shapeWidth, height: shapeHeight), true, 0)
+        let patchWidth = patchView.bounds.width
+        let patchHeight = patchView.bounds.height
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: patchWidth, height: patchHeight), true, 0)
         
-        let m = max(shapeWidth, shapeHeight)
+        let m = max(patchWidth, patchHeight)
         
         pickedImage.draw(in: CGRect(origin: .zero, size: CGSize(width: m, height: m)))
         
-        shapeView.image = UIGraphicsGetImageFromCurrentImageContext()
+        patchView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         
-        updatedShapeViews.append(shapeView)
+        updatedPatchViews.append(patchView)
         dismiss(animated: true, completion: nil)
     }
     

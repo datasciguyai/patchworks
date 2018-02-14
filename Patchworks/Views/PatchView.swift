@@ -1,5 +1,5 @@
 //
-//  ShapeView.swift
+//  PatchView.swift
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/6/17.
@@ -8,34 +8,34 @@
 
 import UIKit
 
-class ShapeView: UIView {
+class PatchView: UIView {
     
-    enum ShapeType: String {
+    enum Shape: String {
         case rectangle = "rectangle"
         case triangle = "triangle"
     }
     
     var shapePath = UIBezierPath()
     var originalFrame = CGRect()
-    var shapeType = ShapeType.rectangle
-    var strokeColor = UIColor.shapeStrokeColor
-    var fillColor = UIColor.shapeFillColor
-    var rotation = CGFloat()
+    var shape = Shape.rectangle
+    var strokeColor = UIColor.patchStrokeColor
+    var fillColor = UIColor.patchFillColor
+    var rotationAngle = CGFloat()
     var image: UIImage? {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    weak var delegate: ShapeDelegate?
+    weak var delegate: PatchDelegate?
     
-    convenience init(frame: CGRect, rotation: CGFloat, image: UIImage? = nil, shapeType: ShapeType) {
+    convenience init(frame: CGRect, rotationAngle: CGFloat, image: UIImage? = nil, shape: Shape) {
         self.init(frame: frame)
         self.originalFrame = frame
-        self.rotation = rotation
+        self.rotationAngle = rotationAngle
         self.image = image
-        self.shapeType = shapeType
-        setup(shape: shapeType)
+        self.shape = shape
+        setup(shape: shape)
     }
     
     override func draw(_ rect: CGRect) {
@@ -70,7 +70,7 @@ class ShapeView: UIView {
         }
     }
     
-    func setup(shape: ShapeType = .rectangle) {
+    func setup(shape: Shape = .rectangle) {
         backgroundColor = UIColor.clear
         if shape == .triangle {
             shapePath = triangle
@@ -85,11 +85,11 @@ class ShapeView: UIView {
         guard shapePath.contains(point) else {
             return nil
         }
-        delegate?.shapeClicked(self)
+        delegate?.patchClicked(self)
         return self
     }
 }
 
-protocol ShapeDelegate: class {
-    func shapeClicked(_ sender: ShapeView)
+protocol PatchDelegate: class {
+    func patchClicked(_ sender: PatchView)
 }

@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F0472F71FFDE16700B3C983 /* ShapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0472F61FFDE16700B3C983 /* ShapeController.swift */; };
-		3F0472F91FFDE23800B3C983 /* Shape+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0472F81FFDE23800B3C983 /* Shape+Convenience.swift */; };
+		3F0472F71FFDE16700B3C983 /* PatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0472F61FFDE16700B3C983 /* PatchController.swift */; };
+		3F0472F91FFDE23800B3C983 /* Patch+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0472F81FFDE23800B3C983 /* Patch+Convenience.swift */; };
 		3F2E103C1FD84CC400AFFC10 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103B1FD84CC400AFFC10 /* BlockView.swift */; };
 		3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */; };
 		3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */; };
-		3F31F85D1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */; };
-		3F31F85F1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */; };
+		3F31F85D1FE42DAE00BD2BD5 /* PatchView+Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85C1FE42DAE00BD2BD5 /* PatchView+Triangle.swift */; };
+		3F31F85F1FE42E4C00BD2BD5 /* PatchView+Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F85E1FE42E4C00BD2BD5 /* PatchView+Rectangle.swift */; };
 		3F31F8631FE43E0C00BD2BD5 /* BlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31F8621FE43E0C00BD2BD5 /* BlockController.swift */; };
 		3F3D928F1FE1B7300013F743 /* BlockView+DoubleCross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */; };
 		3F3D92911FE1DA3E0013F743 /* BlockView+BasketWeave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */; };
@@ -23,7 +23,7 @@
 		3F4032AA1FA0F2FC00EAEBE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4032A81FA0F2FC00EAEBE9 /* LaunchScreen.storyboard */; };
 		3F6C57BF20195E5000F41BE7 /* BlockTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C57BE20195E5000F41BE7 /* BlockTemplate.swift */; };
 		3F6C57C12019623A00F41BE7 /* BlockTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C57C02019623A00F41BE7 /* BlockTemplateController.swift */; };
-		3F87D1C31FD8950B003AC8F5 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87D1C21FD8950B003AC8F5 /* ShapeView.swift */; };
+		3F87D1C31FD8950B003AC8F5 /* PatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87D1C21FD8950B003AC8F5 /* PatchView.swift */; };
 		3FB45BCF2016A8C6005D1B2B /* BlockListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB45BCE2016A8C6005D1B2B /* BlockListTableViewController.swift */; };
 		3FB45BD12017D1C4005D1B2B /* BlockTemplateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB45BD02017D1C4005D1B2B /* BlockTemplateCollectionViewCell.swift */; };
 		3FBACEC81FE9B626002E2250 /* Patchworks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACEC61FE9B626002E2250 /* Patchworks.xcdatamodeld */; };
@@ -31,20 +31,20 @@
 		3FBACECC1FEACE4E002E2250 /* Block+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACECB1FEACE4E002E2250 /* Block+Convenience.swift */; };
 		3FBACED01FEB086B002E2250 /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACECF1FEB086B002E2250 /* BlockTableViewCell.swift */; };
 		3FBACED21FEB6809002E2250 /* BlockTemplatesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED11FEB6809002E2250 /* BlockTemplatesCollectionViewController.swift */; };
-		3FBACED41FFD714B002E2250 /* UIColor+ShapeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */; };
+		3FBACED41FFD714B002E2250 /* UIColor+PatchColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBACED31FFD714B002E2250 /* UIColor+PatchColor.swift */; };
 		3FBF121220215FA7006E78C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBF121120215FA6006E78C6 /* TabBarController.swift */; };
 		3FEBBB3E2029229200E3D500 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEBBB3D2029229200E3D500 /* ShiftableViewController.swift */; };
 		3FF8CBDA1FD9A93000CADA77 /* BlockView+LogCabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F0472F61FFDE16700B3C983 /* ShapeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeController.swift; sourceTree = "<group>"; };
-		3F0472F81FFDE23800B3C983 /* Shape+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+Convenience.swift"; sourceTree = "<group>"; };
+		3F0472F61FFDE16700B3C983 /* PatchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchController.swift; sourceTree = "<group>"; };
+		3F0472F81FFDE23800B3C983 /* Patch+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Patch+Convenience.swift"; sourceTree = "<group>"; };
 		3F2E103B1FD84CC400AFFC10 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		3F2E103E1FD84FFF00AFFC10 /* BlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewController.swift; sourceTree = "<group>"; };
 		3F30B80A1FDB33060013775A /* BlockView+ChurnDash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+ChurnDash.swift"; sourceTree = "<group>"; };
-		3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeView+Triangle.swift"; sourceTree = "<group>"; };
-		3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapeView+Rectangle.swift"; sourceTree = "<group>"; };
+		3F31F85C1FE42DAE00BD2BD5 /* PatchView+Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PatchView+Triangle.swift"; sourceTree = "<group>"; };
+		3F31F85E1FE42E4C00BD2BD5 /* PatchView+Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PatchView+Rectangle.swift"; sourceTree = "<group>"; };
 		3F31F8621FE43E0C00BD2BD5 /* BlockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockController.swift; sourceTree = "<group>"; };
 		3F3D928E1FE1B7300013F743 /* BlockView+DoubleCross.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+DoubleCross.swift"; sourceTree = "<group>"; };
 		3F3D92901FE1DA3E0013F743 /* BlockView+BasketWeave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+BasketWeave.swift"; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		3F4032AB1FA0F2FC00EAEBE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F6C57BE20195E5000F41BE7 /* BlockTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTemplate.swift; sourceTree = "<group>"; };
 		3F6C57C02019623A00F41BE7 /* BlockTemplateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTemplateController.swift; sourceTree = "<group>"; };
-		3F87D1C21FD8950B003AC8F5 /* ShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
+		3F87D1C21FD8950B003AC8F5 /* PatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchView.swift; sourceTree = "<group>"; };
 		3FB45BCE2016A8C6005D1B2B /* BlockListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableViewController.swift; sourceTree = "<group>"; };
 		3FB45BD02017D1C4005D1B2B /* BlockTemplateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTemplateCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FBACEC71FE9B626002E2250 /* Patchworks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Patchworks.xcdatamodel; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		3FBACECB1FEACE4E002E2250 /* Block+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Block+Convenience.swift"; sourceTree = "<group>"; };
 		3FBACECF1FEB086B002E2250 /* BlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		3FBACED11FEB6809002E2250 /* BlockTemplatesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTemplatesCollectionViewController.swift; sourceTree = "<group>"; };
-		3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ShapeColor.swift"; sourceTree = "<group>"; };
+		3FBACED31FFD714B002E2250 /* UIColor+PatchColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PatchColor.swift"; sourceTree = "<group>"; };
 		3FBF121120215FA6006E78C6 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3FEBBB3D2029229200E3D500 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
 		3FF8CBD91FD9A93000CADA77 /* BlockView+LogCabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockView+LogCabin.swift"; sourceTree = "<group>"; };
@@ -87,8 +87,8 @@
 				3FBACECF1FEB086B002E2250 /* BlockTableViewCell.swift */,
 				3FB45BD02017D1C4005D1B2B /* BlockTemplateCollectionViewCell.swift */,
 				3F2E103B1FD84CC400AFFC10 /* BlockView.swift */,
-				3F87D1C21FD8950B003AC8F5 /* ShapeView.swift */,
-				3FBACED31FFD714B002E2250 /* UIColor+ShapeColor.swift */,
+				3F87D1C21FD8950B003AC8F5 /* PatchView.swift */,
+				3FBACED31FFD714B002E2250 /* UIColor+PatchColor.swift */,
 				3F3787B9202FB122008EA30E /* Blocks */,
 				3F3787BA202FB13E008EA30E /* Shapes */,
 			);
@@ -113,7 +113,7 @@
 				3FBACECB1FEACE4E002E2250 /* Block+Convenience.swift */,
 				3F6C57BE20195E5000F41BE7 /* BlockTemplate.swift */,
 				3FBACEC91FEACDF6002E2250 /* CoreDataStack.swift */,
-				3F0472F81FFDE23800B3C983 /* Shape+Convenience.swift */,
+				3F0472F81FFDE23800B3C983 /* Patch+Convenience.swift */,
 				3FBACEC61FE9B626002E2250 /* Patchworks.xcdatamodeld */,
 			);
 			path = Models;
@@ -124,7 +124,7 @@
 			children = (
 				3F31F8621FE43E0C00BD2BD5 /* BlockController.swift */,
 				3F6C57C02019623A00F41BE7 /* BlockTemplateController.swift */,
-				3F0472F61FFDE16700B3C983 /* ShapeController.swift */,
+				3F0472F61FFDE16700B3C983 /* PatchController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -143,8 +143,8 @@
 		3F3787BA202FB13E008EA30E /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				3F31F85E1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift */,
-				3F31F85C1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift */,
+				3F31F85E1FE42E4C00BD2BD5 /* PatchView+Rectangle.swift */,
+				3F31F85C1FE42DAE00BD2BD5 /* PatchView+Triangle.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F0472F71FFDE16700B3C983 /* ShapeController.swift in Sources */,
+				3F0472F71FFDE16700B3C983 /* PatchController.swift in Sources */,
 				3F6C57C12019623A00F41BE7 /* BlockTemplateController.swift in Sources */,
 				3FF8CBDA1FD9A93000CADA77 /* BlockView+LogCabin.swift in Sources */,
 				3FBACECC1FEACE4E002E2250 /* Block+Convenience.swift in Sources */,
@@ -277,20 +277,20 @@
 				3FBACEC81FE9B626002E2250 /* Patchworks.xcdatamodeld in Sources */,
 				3F6C57BF20195E5000F41BE7 /* BlockTemplate.swift in Sources */,
 				3F3D928F1FE1B7300013F743 /* BlockView+DoubleCross.swift in Sources */,
-				3F31F85D1FE42DAE00BD2BD5 /* ShapeView+Triangle.swift in Sources */,
+				3F31F85D1FE42DAE00BD2BD5 /* PatchView+Triangle.swift in Sources */,
 				3FBF121220215FA7006E78C6 /* TabBarController.swift in Sources */,
 				3FB45BD12017D1C4005D1B2B /* BlockTemplateCollectionViewCell.swift in Sources */,
 				3FEBBB3E2029229200E3D500 /* ShiftableViewController.swift in Sources */,
 				3F30B80B1FDB33060013775A /* BlockView+ChurnDash.swift in Sources */,
 				3F3D92911FE1DA3E0013F743 /* BlockView+BasketWeave.swift in Sources */,
 				3FBACECA1FEACDF6002E2250 /* CoreDataStack.swift in Sources */,
-				3F0472F91FFDE23800B3C983 /* Shape+Convenience.swift in Sources */,
-				3F87D1C31FD8950B003AC8F5 /* ShapeView.swift in Sources */,
-				3FBACED41FFD714B002E2250 /* UIColor+ShapeColor.swift in Sources */,
+				3F0472F91FFDE23800B3C983 /* Patch+Convenience.swift in Sources */,
+				3F87D1C31FD8950B003AC8F5 /* PatchView.swift in Sources */,
+				3FBACED41FFD714B002E2250 /* UIColor+PatchColor.swift in Sources */,
 				3FBACED01FEB086B002E2250 /* BlockTableViewCell.swift in Sources */,
 				3FB45BCF2016A8C6005D1B2B /* BlockListTableViewController.swift in Sources */,
 				3F2E103F1FD84FFF00AFFC10 /* BlockViewController.swift in Sources */,
-				3F31F85F1FE42E4C00BD2BD5 /* ShapeView+Rectangle.swift in Sources */,
+				3F31F85F1FE42E4C00BD2BD5 /* PatchView+Rectangle.swift in Sources */,
 				3F2E103C1FD84CC400AFFC10 /* BlockView.swift in Sources */,
 				3F31F8631FE43E0C00BD2BD5 /* BlockController.swift in Sources */,
 				3F4032A01FA0F2FC00EAEBE9 /* AppDelegate.swift in Sources */,
