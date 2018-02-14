@@ -3,7 +3,7 @@
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 1/22/18.
-//  Copyright © 2018 Jeremy Reynolds. All rights reserved.
+//  Copyright © 2018 Jeremiah Reynolds. All rights reserved.
 //
 
 import UIKit
@@ -11,11 +11,19 @@ import CoreData
 
 class BlockListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    @IBOutlet weak var getStartedView: UIView!
+    
     private var fetchedResultsController: NSFetchedResultsController<Block>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureFetchedResultsController()
+        if let fetchedObjects = fetchedResultsController.fetchedObjects {
+            if fetchedObjects.count > 0 {
+                tableView.isScrollEnabled = true
+                getStartedView.isHidden = true
+            }
+        }
     }
     
     private func configureFetchedResultsController() {
@@ -108,9 +116,21 @@ class BlockListTableViewController: UITableViewController, NSFetchedResultsContr
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
             tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let fetchedObjects = fetchedResultsController.fetchedObjects {
+                if fetchedObjects.count != 0 {
+                    tableView.isScrollEnabled = true
+                    getStartedView.isHidden = true
+                }
+            }
         case .delete:
             guard let indexPath = indexPath else { return }
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if let fetchedObjects = fetchedResultsController.fetchedObjects {
+                if fetchedObjects.count == 0 {
+                    tableView.isScrollEnabled = false
+                    getStartedView.isHidden = false
+                }
+            }
         case .move:
             tableView.reloadData()
         case .update:

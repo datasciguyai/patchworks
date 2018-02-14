@@ -1,14 +1,14 @@
 //
-//  PatchView+Triangle.swift
+//  PieceView+Triangle.swift
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/15/17.
-//  Copyright © 2017 Jeremy Reynolds. All rights reserved.
+//  Copyright © 2017 Jeremiah Reynolds. All rights reserved.
 //
 
 import UIKit
 
-extension PatchView {
+extension PieceView {
     var triangle: UIBezierPath {
         let trianglePath = UIBezierPath()
         trianglePath.move(to: CGPoint(x: bounds.midX, y: bounds.minY))

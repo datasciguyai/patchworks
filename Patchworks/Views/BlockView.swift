@@ -3,7 +3,7 @@
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/6/17.
-//  Copyright © 2017 Jeremy Reynolds. All rights reserved.
+//  Copyright © 2017 Jeremiah Reynolds. All rights reserved.
 //
 
 import UIKit
@@ -21,7 +21,7 @@ class BlockView: UIView {
     
     var blockPattern: BlockView.BlockPattern?
     
-    lazy var patchViews: [PatchView]? = {
+    lazy var pieceViews: [PieceView]? = {
         guard let blockPattern = blockPattern else {
             return nil
         }
@@ -42,19 +42,19 @@ class BlockView: UIView {
         self.blockPattern = blockPattern
     }
     
-    convenience init(patchViews: [PatchView]) {
+    convenience init(pieceViews: [PieceView]) {
         self.init()
-        self.patchViews = patchViews
+        self.pieceViews = pieceViews
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        guard let patchViews = patchViews else {
+        guard let pieceViews = pieceViews else {
             return
         }
-        for patchView in patchViews {
-            addSubview(patchView)
-            patchView.delegate = blockVC
+        for pieceView in pieceViews {
+            addSubview(pieceView)
+            pieceView.delegate = blockVC
         }
     }
 }

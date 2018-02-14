@@ -1,14 +1,14 @@
 //
-//  PatchView+Rectangle.swift
+//  PieceView+Rectangle.swift
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/15/17.
-//  Copyright © 2017 Jeremy Reynolds. All rights reserved.
+//  Copyright © 2017 Jeremiah Reynolds. All rights reserved.
 //
 
 import UIKit
 
-extension PatchView {
+extension PieceView {
     var rectangle: UIBezierPath {
         let rectanglePath = UIBezierPath(rect: bounds)
         let pathTransform = CGAffineTransform(rotationAngle: -rotationAngle * CGFloat.pi / 180)

@@ -3,13 +3,13 @@
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/6/17.
-//  Copyright © 2017 Jeremy Reynolds. All rights reserved.
+//  Copyright © 2017 Jeremiah Reynolds. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, PatchDelegate {
+class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, PieceDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var blockViewContainer: UIView!
@@ -25,9 +25,9 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     private let tbController = UIApplication.shared.keyWindow?.rootViewController as! TabBarController
     
-    private var patchView = PatchView()
+    private var pieceView = PieceView()
     
-    private var updatedPatchViews = [PatchView]()
+    private var updatedPieceViews = [PieceView]()
     
     private var blockThumbnailData: Data? {
         guard let blockView = blockView else { return nil }
@@ -40,10 +40,10 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         return UIImageJPEGRepresentation(blockPreviewImage, 1.0)
     }
     
-    private var fetchedResultsController: NSFetchedResultsController<Patch>!
+    private var fetchedResultsController: NSFetchedResultsController<Piece>!
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let blockView = blockView, let patchViews = blockView.patchViews, let titleText = titleTextField.text, !titleText.isEmpty else {
+        guard let blockView = blockView, let pieceViews = blockView.pieceViews, let titleText = titleTextField.text, !titleText.isEmpty else {
             
             let alertController = UIAlertController(title: nil, message: "Please enter a title before saving.", preferredStyle: .alert)
             
@@ -55,22 +55,22 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         }
         
         if let block = block {
-            guard let blockThumbnailData = blockThumbnailData, let patches = fetchedResultsController.fetchedObjects else { return }
+            guard let blockThumbnailData = blockThumbnailData, let pieces = fetchedResultsController.fetchedObjects else { return }
             
             BlockController.shared.update(block: block, blockThumbnailData: blockThumbnailData, title: titleText, notes: notesTextView.text)
             
-            for patchView in updatedPatchViews {
+            for pieceView in updatedPieceViews {
                 var imageData: Data? = nil
-                if let image = patchView.image {
+                if let image = pieceView.image {
                     imageData = UIImageJPEGRepresentation(image, 1.0)
                 }
                 
-                guard let index = patchViews.index(of: patchView) else { continue }
+                guard let index = pieceViews.index(of: pieceView) else { continue }
                 
-                PatchController.shared.update(patch: patches[index], imageData: imageData)
+                PieceController.shared.update(piece: pieces[index], imageData: imageData)
                 
             }
-            updatedPatchViews.removeAll()
+            updatedPieceViews.removeAll()
         } else {
             guard let blockThumbnailData = blockThumbnailData else { return }
             
@@ -78,12 +78,12 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
             
             guard let block = BlockController.shared.block else { return }
             
-            for patchView in patchViews {
-                if let image = patchView.image {
+            for pieceView in pieceViews {
+                if let image = pieceView.image {
                     guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { continue }
-                    PatchController.shared.createPatchWith(patchImageData: imageData,rawRect: NSStringFromCGRect(patchView.originalFrame), rotationAngle: Float(patchView.rotationAngle), type: patchView.shape.rawValue, block: block)
+                    PieceController.shared.createPieceWith(pieceImageData: imageData,rawRect: NSStringFromCGRect(pieceView.originalFrame), rotationAngle: Float(pieceView.rotationAngle), shape: pieceView.shape.rawValue, block: block)
                 } else {
-                    PatchController.shared.createPatchWith(rawRect: NSStringFromCGRect(patchView.originalFrame), rotationAngle: Float(patchView.rotationAngle), type: patchView.shape.rawValue, block: block)
+                    PieceController.shared.createPieceWith(rawRect: NSStringFromCGRect(pieceView.originalFrame), rotationAngle: Float(pieceView.rotationAngle), shape: pieceView.shape.rawValue, block: block)
                 }
             }
         }
@@ -95,9 +95,9 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     private func configureFetchedResultsController() {
         guard let block = block else { return }
         if fetchedResultsController == nil {
-            let fetchRequest: NSFetchRequest<Patch> = Patch.fetchRequest()
+            let fetchRequest: NSFetchRequest<Piece> = Piece.fetchRequest()
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "imageFileName", ascending: true)]
-            fetchedResultsController = NSFetchedResultsController<Patch>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController = NSFetchedResultsController<Piece>(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
         fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "block == %@", block)
@@ -153,23 +153,23 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     var setupBlockView: BlockView? {
         
-        var patchViews = [PatchView]()
-        guard let patches = fetchedResultsController.fetchedObjects else { return nil}
-        for patch in patches {
-            guard let rawRect = patch.rawRect, let shape = patch.shape, let patchViewShape = PatchView.Shape(rawValue: shape) else { return nil}
+        var pieceViews = [PieceView]()
+        guard let pieces = fetchedResultsController.fetchedObjects else { return nil}
+        for piece in pieces {
+            guard let rawRect = piece.rawRect, let pieceViewShape = PieceView.Shape(rawValue: piece.shape) else { return nil}
             
-            if let imageFileName = patch.imageFileName{
+            if let imageFileName = piece.imageFileName{
                 
-                guard let patchImageURL = PatchController.shared.patchImagesDirectoryURL else { continue }
+                guard let pieceImageURL = PieceController.shared.pieceImagesDirectoryURL else { continue }
                 
-                let image = UIImage(contentsOfFile: patchImageURL.appendingPathComponent(imageFileName).path)
+                let image = UIImage(contentsOfFile: pieceImageURL.appendingPathComponent(imageFileName).path)
                 
-                patchViews.append(PatchView(frame: CGRectFromString(rawRect), rotationAngle: CGFloat(patch.rotationAngle), image: image, shape: patchViewShape))
+                pieceViews.append(PieceView(frame: CGRectFromString(rawRect), rotationAngle: CGFloat(piece.rotationAngle), image: image, shape: pieceViewShape))
             } else {
-                patchViews.append(PatchView(frame: CGRectFromString(rawRect), rotationAngle: CGFloat(patch.rotationAngle), shape: patchViewShape))
+                pieceViews.append(PieceView(frame: CGRectFromString(rawRect), rotationAngle: CGFloat(piece.rotationAngle), shape: pieceViewShape))
             }
         }
-        return BlockView(patchViews: patchViews)
+        return BlockView(pieceViews: pieceViews)
     }
     
     func addConstraintsFor(blockView: BlockView) {
@@ -181,8 +181,8 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
         blockViewContainer.addConstraints([blockViewLeading, blockViewTrailing, blockViewTop, blockViewBottom])
     }
     
-    func patchClicked(_ sender: PatchView) {
-        patchView = sender
+    func pieceClicked(_ sender: PieceView) {
+        pieceView = sender
         alertController()
     }
     
@@ -207,10 +207,10 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
 //            })
 //        }
         
-        if patchView.image != nil {
+        if pieceView.image != nil {
             alertController.addAction(UIAlertAction(title: "Delete Image", style: .destructive) { _ in
-                self.updatedPatchViews.append(self.patchView)
-                self.patchView.removeImage()
+                self.updatedPieceViews.append(self.pieceView)
+                self.pieceView.removeImage()
             })
         }
         
@@ -221,19 +221,19 @@ class BlockViewController: ShiftableViewController, NSFetchedResultsControllerDe
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
-        let patchWidth = patchView.bounds.width
-        let patchHeight = patchView.bounds.height
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: patchWidth, height: patchHeight), true, 0)
+        let pieceWidth = pieceView.bounds.width
+        let pieceHeight = pieceView.bounds.height
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: pieceWidth, height: pieceHeight), true, 0)
         
-        let m = max(patchWidth, patchHeight)
+        let maxOfWidthHeight = max(pieceWidth, pieceHeight)
         
-        pickedImage.draw(in: CGRect(origin: .zero, size: CGSize(width: m, height: m)))
+        pickedImage.draw(in: CGRect(origin: .zero, size: CGSize(width: maxOfWidthHeight, height: maxOfWidthHeight)))
         
-        patchView.image = UIGraphicsGetImageFromCurrentImageContext()
+        pieceView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         
-        updatedPatchViews.append(patchView)
+        updatedPieceViews.append(pieceView)
         dismiss(animated: true, completion: nil)
     }
     

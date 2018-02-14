@@ -3,7 +3,7 @@
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/15/17.
-//  Copyright © 2017 Jeremy Reynolds. All rights reserved.
+//  Copyright © 2017 Jeremiah Reynolds. All rights reserved.
 //
 
 import CoreData
@@ -53,10 +53,10 @@ class BlockController {
     // MARK: - Delete
     
     func delete(block: Block) {
-        guard let managedObjectContext = block.managedObjectContext, let patchesURL = PatchController.shared.patchImagesDirectoryURL, let patches = block.patches?.array as? [Patch] else { return }
-        for patch in patches {
-            if let imageFileName = patch.imageFileName {
-                try? FileManager.default.removeItem(at: patchesURL.appendingPathComponent(imageFileName))
+        guard let managedObjectContext = block.managedObjectContext, let piecesURL = PieceController.shared.pieceImagesDirectoryURL, let pieces = block.pieces?.array as? [Piece] else { return }
+        for piece in pieces {
+            if let imageFileName = piece.imageFileName {
+                try? FileManager.default.removeItem(at: piecesURL.appendingPathComponent(imageFileName))
             }
         }
         guard let blockURL = blockThumbnailsDirectoryURL, let blockImageFileName = block.thumbnailFileName else { return }

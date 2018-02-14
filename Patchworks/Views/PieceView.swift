@@ -1,25 +1,25 @@
 //
-//  PatchView.swift
+//  PieceView.swift
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 12/6/17.
-//  Copyright © 2017 Jeremy Reynolds. All rights reserved.
+//  Copyright © 2017 Jeremiah Reynolds. All rights reserved.
 //
 
 import UIKit
 
-class PatchView: UIView {
+class PieceView: UIView {
     
-    enum Shape: String {
-        case rectangle = "rectangle"
-        case triangle = "triangle"
+    enum Shape: Int16 {
+        case rectangle = 0
+        case triangle = 1
     }
     
     var shapePath = UIBezierPath()
     var originalFrame = CGRect()
     var shape = Shape.rectangle
-    var strokeColor = UIColor.patchStrokeColor
-    var fillColor = UIColor.patchFillColor
+    var strokeColor = UIColor.pieceStrokeColor
+    var fillColor = UIColor.pieceFillColor
     var rotationAngle = CGFloat()
     var image: UIImage? {
         didSet {
@@ -27,7 +27,7 @@ class PatchView: UIView {
         }
     }
     
-    weak var delegate: PatchDelegate?
+    weak var delegate: PieceDelegate?
     
     convenience init(frame: CGRect, rotationAngle: CGFloat, image: UIImage? = nil, shape: Shape) {
         self.init(frame: frame)
@@ -85,11 +85,11 @@ class PatchView: UIView {
         guard shapePath.contains(point) else {
             return nil
         }
-        delegate?.patchClicked(self)
+        delegate?.pieceClicked(self)
         return self
     }
 }
 
-protocol PatchDelegate: class {
-    func patchClicked(_ sender: PatchView)
+protocol PieceDelegate: class {
+    func pieceClicked(_ sender: PieceView)
 }

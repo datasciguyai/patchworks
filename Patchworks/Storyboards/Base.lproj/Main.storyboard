@@ -98,10 +98,29 @@
         <scene sceneID="oso-5l-kwU">
             <objects>
                 <tableViewController id="ndx-VC-WJc" customClass="BlockListTableViewController" customModule="Patchworks" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B1L-Zp-4HC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B1L-Zp-4HC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="background"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="BGz-eD-Yqe">
+                            <rect key="frame" x="0.0" y="169" width="375" height="200"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the Block Templates tab and select a block to get started." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKt-tu-zkd">
+                                    <rect key="frame" x="8" y="75" width="359" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="SKt-tu-zkd" secondAttribute="trailing" constant="8" id="Hvv-6D-lMV"/>
+                                <constraint firstAttribute="bottom" secondItem="SKt-tu-zkd" secondAttribute="bottom" constant="75" id="gcQ-uc-snE"/>
+                                <constraint firstItem="SKt-tu-zkd" firstAttribute="top" secondItem="BGz-eD-Yqe" secondAttribute="top" constant="75" id="k3v-FT-3hQ"/>
+                                <constraint firstItem="SKt-tu-zkd" firstAttribute="leading" secondItem="BGz-eD-Yqe" secondAttribute="leading" constant="8" id="le6-ll-YNW"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="blockListTableViewCell" rowHeight="141" id="cQT-P3-FGS" customClass="BlockTableViewCell" customModule="Patchworks" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="141"/>
@@ -165,6 +184,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Blocks" id="VgW-Nc-rt7"/>
+                    <connections>
+                        <outlet property="getStartedView" destination="BGz-eD-Yqe" id="Hgm-Sq-Tfu"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LDd-Ce-8Iw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
