@@ -3,7 +3,7 @@
 //  Patchworks
 //
 //  Created by Jeremy Reynolds on 1/22/18.
-//  Copyright © 2018 Jeremiah Reynolds. All rights reserved.
+//  Copyright © 2018 Jeremy Reynolds. All rights reserved.
 //
 
 import UIKit
