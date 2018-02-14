@@ -434,7 +434,7 @@
 				DEVELOPMENT_TEAM = FW95769X88;
 				INFOPLIST_FILE = Patchworks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahReynolds.Patchworks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JeremyReynolds.Patchworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -449,7 +449,7 @@
 				DEVELOPMENT_TEAM = FW95769X88;
 				INFOPLIST_FILE = Patchworks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahReynolds.Patchworks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JeremyReynolds.Patchworks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
